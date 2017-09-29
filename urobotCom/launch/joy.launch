@@ -1,0 +1,5 @@
+<launch>
+	<node name="joypad" pkg="joy" type="joy_node"/>
+	<node name="interpret" pkg="urobotCom" type ="joy_interpret"/>
+        <!--<node name="irSender" pkg="urobotCom" type="ircom.py"/>-->
+</launch>
