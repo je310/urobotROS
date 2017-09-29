@@ -162,9 +162,9 @@ def talker():
                 loopcount= loopcount +1
                 value = master.read()
                 if confState == 0 and len(value) >0:
-                    print ord(value)
+
                     if ord(value) == 0xAC:
-                        print 'got ac'
+
                         confState = 1
                         continue
                 if confState == 1:
