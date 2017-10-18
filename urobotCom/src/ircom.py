@@ -84,6 +84,11 @@ def fightCB(data):
         typeTemp = 9
         robotsTemp = 4
 
+def followCB(data):
+    global typeTemp
+    if data.data == 'follow':
+        typeTemp =4
+
 
 
 #    print rot, lin
@@ -111,6 +116,7 @@ def talker():
     rospy.Subscriber("rob2", Twist, rob2CB)
     rospy.Subscriber("rob3", Twist, rob3CB)
     rospy.Subscriber("fight", String, fightCB)
+    rospy.Subscriber("follow", String, followCB)
     serdev = '/dev/ttyACM0'
     master = serial.Serial(
     port=serdev,
@@ -127,7 +133,7 @@ def talker():
         type = typeTemp
         robots = robotsTemp
         msgs = [rob0,rob1,rob2,rob3]
-        #print msgs
+        print msgs
 
         #send header. 2 bytes
         master.write(chr(header))
@@ -139,7 +145,7 @@ def talker():
 
         #send type (move, report batt voltage etc)
         master.write(chr(type))
-
+        print type
         #Send the command value for each robot
         for x in range(0, robots):
             master.write(chr(msgs[x]))
