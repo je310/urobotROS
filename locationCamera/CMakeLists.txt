@@ -133,6 +133,7 @@ include_directories(
 
 ## Declare a C++ executable
 add_executable(locationCamera_node src/locationCamera.cpp)
+add_executable(cameraLimiter src/cameraLimiter.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -142,6 +143,9 @@ add_executable(locationCamera_node src/locationCamera.cpp)
  target_link_libraries(locationCamera_node
    ${catkin_LIBRARIES}
  )
+target_link_libraries(cameraLimiter
+  ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
