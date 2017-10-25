@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   tf
   image_geometry
+  camera_info_manager
 )
 
 ## System dependencies are found with CMake's conventions
@@ -121,6 +122,8 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lpthread")
+
 ## Declare a C++ library
 # add_library(locationCamera
 #   src/${PROJECT_NAME}/locationCamera.cpp
@@ -134,7 +137,7 @@ include_directories(
 ## Declare a C++ executable
 add_executable(locationCamera_node src/locationCamera.cpp)
 add_executable(cameraLimiter src/cameraLimiter.cpp)
-
+add_executable(globalShutterCam src/globalShutterCam.cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(locationCamera_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
@@ -144,6 +147,9 @@ add_executable(cameraLimiter src/cameraLimiter.cpp)
    ${catkin_LIBRARIES}
  )
 target_link_libraries(cameraLimiter
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(globalShutterCam
   ${catkin_LIBRARIES}
 )
 

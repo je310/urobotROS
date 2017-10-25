@@ -12,11 +12,10 @@
       <param name="width" value="640"/>
       <param name="height" value="480"/>
       <!-- choose whichever uncompressed format the camera supports: -->
-      <param name="video_mode" value="yuyv"/> <!-- or yuyv/nv12/mjpeg -->
-      <param name="frame_rate" value="30"/>
+      <param name="video_mode" value="mjpeg"/> <!-- or yuyv/nv12/mjpeg -->
+      <param name="frame_rate" value="90"/>
 
       <param name="timestamp_method" value="start"/> <!-- start of frame -->
-      <param name="camera_info_url" value="file://$(find locateCamera)/src/ost.yaml"/>
 
       <param name="auto_exposure" value="3"/> <!-- use aperture_priority auto exposure -->
       <param name="auto_white_balance" value="false"/>
