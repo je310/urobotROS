@@ -54,31 +54,28 @@ void pubImage(image_transport::CameraPublisher& image_pub_, cv::Mat image,int&re
 
 
 int main(int argc, char** argv) {
-    ros::init(argc, argv, "doubleCamManager");
+    ros::init(argc, argv, "singleCamManager");
     ros::NodeHandle node;
     image_transport::ImageTransport it_(node);
 
 
     image_transport::CameraPublisher imagePubL;
-    imagePubL = it_.advertiseCamera("left/image/", 1);
-    image_transport::CameraPublisher imagePubR;
-    imagePubR = it_.advertiseCamera("right/image/", 1);
+    imagePubL = it_.advertiseCamera("camera/image/", 1);
+
     cv::VideoCapture cap(0);
 
-    cv::VideoCapture cap2(1);
-
-    if(!cap.isOpened() && !cap2.isOpened())  // check if we succeeded
+    if(!cap.isOpened())  // check if we succeeded
         return -1;
 
 
     std::string camera_info_urlL, camera_name_L, frame_id_L,camera_info_urlR, camera_name_R, frame_id_R;
 
     node.param<std::string>("camera_info_url",camera_info_urlL,"");
-    node.param<std::string>("frame_id", frame_id_L, "left");
-    node.param("camera_name", camera_name_L, std::string("left"));
+    node.param<std::string>("frame_id", frame_id_L, "camera");
+    node.param("camera_name", camera_name_L, std::string("camera"));
     std::stringstream cinfo_nameL;
-    cinfo_nameL << "Left";
-    cinfo_L.reset(new camera_info_manager::CameraInfoManager(ros::NodeHandle("left"), camera_name_L, camera_info_urlL));
+    cinfo_nameL << "camera";
+    cinfo_L.reset(new camera_info_manager::CameraInfoManager(ros::NodeHandle("camera"), camera_name_L, camera_info_urlL));
 
     if (!cinfo_L->isCalibrated())
        {
@@ -90,63 +87,25 @@ int main(int argc, char** argv) {
          cinfo_L->setCameraInfo(camera_info);
        }
 
-    node.param<std::string>("camera_info_url",camera_info_urlR,"");
-    node.param<std::string>("frame_id", frame_id_R, "Right");
-    node.param("camera_name", camera_name_R, std::string("Right"));
-    std::stringstream cinfo_nameR;
-    cinfo_nameR << "Right";
-    cinfo_R.reset(new camera_info_manager::CameraInfoManager(ros::NodeHandle("right"), camera_name_R, camera_info_urlR));
-
-    if (!cinfo_R->isCalibrated())
-       {
-         cinfo_R->setCameraName(camera_name_R);
-         sensor_msgs::CameraInfo camera_info;
-         camera_info.header.frame_id = frame_id_R;
-         camera_info.width = 640;
-         camera_info.height = 480;
-         cinfo_R->setCameraInfo(camera_info);
-       }
 
 
-    cv::Mat frameL,frameR;
+    cv::Mat frameL;
 
     cv::waitKey(1);
     int LeftReady = 1;
-    int RightReady = 1;
+
     int frameNum = 0;
-    cv::Mat test, test2,test3, test4;
+
     while(ros::ok()){
         frameNum++;
         cap >> frameL; // get a new frame from camera
-        cap2 >> frameR ;
-//        cv::imshow("frameL", frameL);
-//        cv::imshow("frameR", frameR);
 
         if(LeftReady == 1){
             LeftReady = 0;
-            std::thread fullResThread = std::thread(pubImage,std::ref(imagePubL),frameL,std::ref(LeftReady),"Left",cinfo_L);
+            std::thread fullResThread = std::thread(pubImage,std::ref(imagePubL),frameL,std::ref(LeftReady),"camera",cinfo_L);
             fullResThread.detach();
         }
-        if(RightReady == 1){
-            RightReady =0;
-            std::thread fullResThread = std::thread(pubImage,std::ref(imagePubR),frameR,std::ref(RightReady),"Right",cinfo_R);
-            fullResThread.detach();
-        }
-//        if(frameNum == 299){
 
-//            frameL.copyTo(test);
-//            frameR.copyTo(test2);
-
-//        }
-//        if(frameNum == 300){
-//            frameL.copyTo(test3);
-//            frameR.copyTo(test4);
-//            cv::imshow("frameL299", test);
-//            cv::imshow("frameR299", test2);
-//            cv::imshow("frameL300", test3);
-//            cv::imshow("frameR300", test4);
-//            cv::waitKey(1000);
-//        }
         cv::waitKey(1);
         ros::spinOnce();
 
