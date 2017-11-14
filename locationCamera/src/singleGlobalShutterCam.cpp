@@ -28,9 +28,10 @@
 #include<stdio.h>
 #include <math.h>
 #include <unistd.h>
-
+cv::Mat unDistIm ;
+int correctedReady = 0;
 boost::shared_ptr<camera_info_manager::CameraInfoManager> cinfo_L,cinfo_R;
-void pubImage(image_transport::CameraPublisher& image_pub_, cv::Mat image,int&ready, std::string ID,boost::shared_ptr<camera_info_manager::CameraInfoManager> cinfo_){
+void pubImage(image_transport::CameraPublisher& image_pub_, cv::Mat image,int&ready, std::string ID,boost::shared_ptr<camera_info_manager::CameraInfoManager> cinfo_,int shouldUndist){
     cv_bridge::CvImage out_msg;
 
     sensor_msgs::CameraInfoPtr ci(new sensor_msgs::CameraInfo(cinfo_->getCameraInfo()));
@@ -48,7 +49,22 @@ void pubImage(image_transport::CameraPublisher& image_pub_, cv::Mat image,int&re
 
     image_pub_.publish(*out_msg.toImageMsg(),*ci);
 
+    if(shouldUndist){
+        cv::Mat intrinsic = cv::Mat(3, 3, CV_32FC1);
+        cv::Mat distCoeff = cv::Mat(ci->D.size(),1,CV_32FC1);
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                intrinsic.at<float>(i,j) = ci->K[3*i+j];
+            }
+        }
+        for(int i = 0; i < ci->D.size(); i++){
+            distCoeff.at<float>(i) = ci->D[i];
+        }
+        cv::undistort(image,unDistIm,intrinsic,distCoeff);
+
+    }
     ready = 1;
+    correctedReady = 1;
     return;
 }
 
@@ -59,8 +75,9 @@ int main(int argc, char** argv) {
     image_transport::ImageTransport it_(node);
 
 
-    image_transport::CameraPublisher imagePubL;
+    image_transport::CameraPublisher imagePubL,imagePubR;
     imagePubL = it_.advertiseCamera("camera/image/", 1);
+    imagePubR = it_.advertiseCamera("camera_corrected/image/", 1);
 
     cv::VideoCapture cap(0);
 
@@ -88,23 +105,49 @@ int main(int argc, char** argv) {
        }
 
 
+    node.param<std::string>("camera_info_url",camera_info_urlR,"");
+    node.param<std::string>("frame_id", frame_id_R, "camera");
+    node.param("camera_name", camera_name_R, std::string("camera_corrected"));
+    std::stringstream cinfo_nameR;
+    cinfo_nameR << "camera_corrected";
+    cinfo_R.reset(new camera_info_manager::CameraInfoManager(ros::NodeHandle("camera_corrected"), camera_name_R, camera_info_urlR));
+    if (!cinfo_R->isCalibrated())
+       {
+         cinfo_R->setCameraName(camera_name_R);
+         sensor_msgs::CameraInfo camera_info;
+         camera_info.header.frame_id = frame_id_R;
+         camera_info.width = 640;
+         camera_info.height = 480;
+         cinfo_R->setCameraInfo(camera_info);
+       }
+
+
 
     cv::Mat frameL;
 
     cv::waitKey(1);
     int LeftReady = 1;
+    int correctedPub = 1;
 
     int frameNum = 0;
-
+    int lastFrame = 0;
     while(ros::ok()){
         frameNum++;
         cap >> frameL; // get a new frame from camera
 
         if(LeftReady == 1){
             LeftReady = 0;
-            std::thread fullResThread = std::thread(pubImage,std::ref(imagePubL),frameL,std::ref(LeftReady),"camera",cinfo_L);
+            std::thread fullResThread = std::thread(pubImage,std::ref(imagePubL),frameL,std::ref(LeftReady),"camera",cinfo_L,1);
             fullResThread.detach();
         }
+        if(unDistIm.cols != 0 && correctedPub && frameNum != lastFrame){
+            lastFrame = frameNum;
+            correctedReady = 0;
+            std::thread correctedThread = std::thread(pubImage,std::ref(imagePubR),unDistIm,std::ref(correctedPub),"camera",cinfo_R,0);
+            correctedThread.detach();
+            cv::imshow("corrected",unDistIm);
+        }
+
 
         cv::waitKey(1);
         ros::spinOnce();

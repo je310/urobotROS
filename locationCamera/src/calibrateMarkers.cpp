@@ -21,16 +21,16 @@ int main(int argc, char** argv) {
     marker_pub = node.advertise<visualization_msgs::Marker>("corners", 1);
 
     int dataCounter = 0;
-    int dataToCollect = 20;
+    int dataToCollect = 200;
     std::vector<tf::StampedTransform> transList;
     //collect transfrorms.
     while(dataCounter < dataToCollect){
         try{
             tf::StampedTransform transformToRef,transformToOther;
 
-            tl.lookupTransform("/ar_marker_3", "/Left",
+            tl.lookupTransform("/ar_marker_3", "/camera",
                                ros::Time(0), transformToRef);
-            tl.lookupTransform("/ar_marker_5", "/Left",
+            tl.lookupTransform("/ar_marker_5", "/camera",
                                ros::Time(0), transformToOther);
             tf::StampedTransform transform;
             transform.mult( transformToRef,transformToOther.inverse());
@@ -140,7 +140,7 @@ int main(int argc, char** argv) {
     nameMarkers.push_back("5");
     std::ofstream myfile;
     std::stringstream ss;
-    ss << ros::package::getPath("locationCamera") << "/bundle/calibrated.xml";
+    ss <<"/home/josh/urobot_ws/src/locationCamera"<< "/bundle/calibrated.xml";
     myfile.open (ss.str().c_str());
     myfile << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << std::endl;
     myfile << "<multimarker markers=\"2\">" <<std::endl;

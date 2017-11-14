@@ -20,7 +20,7 @@
 #include <thread>
 #include <camera_info_manager/camera_info_manager.h>
 #include <sensor_msgs/CameraInfo.h>
-
+#include <std_msgs/String.h>
 
 #include <iostream>
 #include <ctype.h>
@@ -51,6 +51,10 @@ void pubImage(image_transport::CameraPublisher& image_pub_, cv::Mat image,int&re
     ready = 1;
     return;
 }
+bool isSwapped = 0;
+void swapCB(std_msgs::StringConstPtr msg){
+    isSwapped = !isSwapped;
+}
 
 
 int main(int argc, char** argv) {
@@ -63,6 +67,7 @@ int main(int argc, char** argv) {
     imagePubL = it_.advertiseCamera("left/image/", 1);
     image_transport::CameraPublisher imagePubR;
     imagePubR = it_.advertiseCamera("right/image/", 1);
+    ros::Subscriber swapSub = node.subscribe("/swap",1,&swapCB);
     cv::VideoCapture cap(0);
 
     cv::VideoCapture cap2(1);
@@ -117,8 +122,14 @@ int main(int argc, char** argv) {
     cv::Mat test, test2,test3, test4;
     while(ros::ok()){
         frameNum++;
+        if(isSwapped){
         cap >> frameL; // get a new frame from camera
         cap2 >> frameR ;
+        }
+        else{
+            cap >> frameR; // get a new frame from camera
+            cap2 >> frameL ;
+        }
 //        cv::imshow("frameL", frameL);
 //        cv::imshow("frameR", frameR);
 

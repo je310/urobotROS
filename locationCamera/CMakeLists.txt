@@ -140,6 +140,7 @@ add_executable(cameraLimiter src/cameraLimiter.cpp)
 add_executable(globalShutterCam src/globalShutterCam.cpp)
 add_executable(singleGlobalShutterCam src/singleGlobalShutterCam.cpp)
 add_executable(calibrateMarkers src/calibrateMarkers.cpp)
+
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(locationCamera_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
@@ -161,6 +162,7 @@ target_link_libraries(calibrateMarkers
 target_link_libraries(singleGlobalShutterCam
   ${catkin_LIBRARIES}
 )
+
 
 #############
 ## Install ##
