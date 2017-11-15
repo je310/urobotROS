@@ -145,7 +145,7 @@ int main(int argc, char** argv) {
             correctedReady = 0;
             std::thread correctedThread = std::thread(pubImage,std::ref(imagePubR),unDistIm,std::ref(correctedPub),"camera",cinfo_R,0);
             correctedThread.detach();
-            cv::imshow("corrected",unDistIm);
+           // cv::imshow("corrected",unDistIm);
         }
 
 
