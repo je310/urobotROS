@@ -31,7 +31,34 @@
 cv::Mat unDistIm ;
 int correctedReady = 0;
 boost::shared_ptr<camera_info_manager::CameraInfoManager> cinfo_L,cinfo_R;
-void pubImage(image_transport::CameraPublisher& image_pub_, cv::Mat image,int&ready, std::string ID,boost::shared_ptr<camera_info_manager::CameraInfoManager> cinfo_,int shouldUndist){
+
+void InitmyUndistort(cv::Mat input, boost::shared_ptr<camera_info_manager::CameraInfoManager> cinfo_, cv::Mat &map1,cv::Mat &map2){
+    sensor_msgs::CameraInfoPtr ci(new sensor_msgs::CameraInfo(cinfo_->getCameraInfo()));
+
+    cv::Mat intrinsic = cv::Mat(3, 3, CV_32FC1);
+    cv::Mat distCoeff = cv::Mat(ci->D.size(),1,CV_32FC1);
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            intrinsic.at<float>(i,j) = ci->K[3*i+j];
+        }
+    }
+    for(int i = 0; i < ci->D.size(); i++){
+        distCoeff.at<float>(i) = ci->D[i];
+    }
+
+    intrinsic.at<float>(2,2)= 1;
+    cv::Mat newCamMatrix = cv::getOptimalNewCameraMatrix(intrinsic,distCoeff,input.size(),0);
+    cv::Mat R;
+    cv::initUndistortRectifyMap(intrinsic,distCoeff, R, newCamMatrix, input.size(), CV_16SC2, map1, map2);
+}
+
+cv::Mat myUndistort(cv::Mat &input,cv::Mat &map1,cv::Mat &map2){
+    cv::Mat output;
+    cv::Mat R;
+    remap(input, output, map1,map2, cv::INTER_NEAREST, cv::BORDER_CONSTANT);
+    return output;
+}
+void pubImage(image_transport::CameraPublisher& image_pub_, cv::Mat image,int&ready, std::string ID,boost::shared_ptr<camera_info_manager::CameraInfoManager> cinfo_,cv::Mat &map1,cv::Mat &map2,int shouldUndist){
     cv_bridge::CvImage out_msg;
 
     sensor_msgs::CameraInfoPtr ci(new sensor_msgs::CameraInfo(cinfo_->getCameraInfo()));
@@ -131,20 +158,24 @@ int main(int argc, char** argv) {
 
     int frameNum = 0;
     int lastFrame = 0;
+    cv::Mat map1;
+    cv::Mat map2;
+    cap >> frameL;
+    InitmyUndistort(frameL,cinfo_L,map1,map2);
     while(ros::ok()){
         frameNum++;
         cap >> frameL; // get a new frame from camera
 
         if(LeftReady == 1){
             LeftReady = 0;
-            std::thread fullResThread = std::thread(pubImage,std::ref(imagePubL),frameL,std::ref(LeftReady),"camera",cinfo_L,0);
+            std::thread fullResThread = std::thread(pubImage,std::ref(imagePubL),frameL,std::ref(LeftReady),"camera",cinfo_L,std::ref(map1),std::ref(map2),1);
             fullResThread.detach();
         }
         if(unDistIm.cols != 0 && correctedPub && frameNum != lastFrame){
             lastFrame = frameNum;
             correctedReady = 0;
-           // std::thread correctedThread = std::thread(pubImage,std::ref(imagePubR),unDistIm,std::ref(correctedPub),"camera",cinfo_R,0);
-           // correctedThread.detach();
+            std::thread correctedThread = std::thread(pubImage,std::ref(imagePubR),unDistIm,std::ref(correctedPub),"camera",cinfo_R,std::ref(map1),std::ref(map2),0);
+            correctedThread.detach();
            // cv::imshow("corrected",unDistIm);
         }
 
