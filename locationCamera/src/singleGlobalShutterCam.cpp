@@ -137,14 +137,14 @@ int main(int argc, char** argv) {
 
         if(LeftReady == 1){
             LeftReady = 0;
-            std::thread fullResThread = std::thread(pubImage,std::ref(imagePubL),frameL,std::ref(LeftReady),"camera",cinfo_L,1);
+            std::thread fullResThread = std::thread(pubImage,std::ref(imagePubL),frameL,std::ref(LeftReady),"camera",cinfo_L,0);
             fullResThread.detach();
         }
         if(unDistIm.cols != 0 && correctedPub && frameNum != lastFrame){
             lastFrame = frameNum;
             correctedReady = 0;
-            std::thread correctedThread = std::thread(pubImage,std::ref(imagePubR),unDistIm,std::ref(correctedPub),"camera",cinfo_R,0);
-            correctedThread.detach();
+           // std::thread correctedThread = std::thread(pubImage,std::ref(imagePubR),unDistIm,std::ref(correctedPub),"camera",cinfo_R,0);
+           // correctedThread.detach();
            // cv::imshow("corrected",unDistIm);
         }
 
