@@ -164,7 +164,7 @@ int main(int argc, char** argv) {
     node.param("camera_name", camera_name_R, std::string("camera_corrected"));
     std::stringstream cinfo_nameR;
     cinfo_nameR << "camera_corrected";
-    cinfo_R.reset(new camera_info_manager::CameraInfoManager(ros::NodeHandle("camera_corrected"), camera_name_R, camera_info_urlR));
+    cinfo_R.reset(new camera_info_manager::CameraInfoManager(ros::NodeHandle("camera"), camera_name_R, camera_info_urlR));
     if (!cinfo_R->isCalibrated())
        {
          cinfo_R->setCameraName(camera_name_R);
