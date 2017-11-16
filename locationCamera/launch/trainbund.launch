@@ -1,5 +1,6 @@
 <launch>
-	<node name="cams" pkg="locationCamera" type="singleGlobalShutterCam" />
+<machine name="orangepi" address="orangepi" user="root" env-loader="~/urobot_ws/devel/env.sh"/>
+        <node  name="cams" pkg="locationCamera" type="singleGlobalShutterCam" />
         <arg name="marker_size" default="2.471" />
         <arg name="max_new_marker_error" default="0.08" />
         <arg name="max_track_error" default="0.2" />
@@ -9,6 +10,6 @@
 
         <arg name="output_frame" value="/camera" />
         <node name="rviz" pkg="rviz" type="rviz" />
-<node name="trainer" pkg="locationCamera" type="calibrateMarkers" />
-<node name="ar_track_alvar" pkg="ar_track_alvar" type="individualMarkersNoKinect"  respawn="false" output="screen" args="$(arg marker_size) $(arg max_new_marker_error) $(arg max_track_error) $(arg cam_image_topic) $(arg cam_info_topic) $(arg output_frame) " />
+<node  name="trainer" pkg="locationCamera" type="calibrateMarkers" />
+<node   name="ar_track_alvar" pkg="ar_track_alvar" type="individualMarkersNoKinect"  respawn="false" output="screen" args="$(arg marker_size) $(arg max_new_marker_error) $(arg max_track_error) $(arg cam_image_topic) $(arg cam_info_topic) $(arg output_frame) " />
 </launch>
