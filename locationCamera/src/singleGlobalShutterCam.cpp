@@ -96,7 +96,7 @@ void collectImThread(cv::VideoCapture vid,cv::Mat &image, int &ready, int &frame
     ready = 1;
 }
 
-void serialThread(image_transport::CameraPublisher& image_pub_, cv::Mat image,int&ready, std::string ID,boost::shared_ptr<camera_info_manager::CameraInfoManager> cinfo_,cv::Mat &map1,cv::Mat &map2,int &threadCount,ros::Time sampleT ){
+void serialThread(image_transport::CameraPublisher& image_pub_, cv::Mat image,int&ready, std::string ID,boost::shared_ptr<camera_info_manager::CameraInfoManager> cinfo_,cv::Mat &map1,cv::Mat &map2,int &threadCount,ros::Time sampleT,int shouldCorrect ){
     threadCount++;
     cv::Mat imCopy;
     image.copyTo(imCopy);
@@ -107,8 +107,10 @@ void serialThread(image_transport::CameraPublisher& image_pub_, cv::Mat image,in
 
 
     out_msg.encoding = sensor_msgs::image_encodings::RGB8;
-
-    out_msg.image = myUndistort(imCopy,map1,map2);;
+    if(shouldCorrect){
+        out_msg.image = myUndistort(imCopy,map1,map2);
+    }
+    else out_msg.image = imCopy;
     out_msg.header.stamp =sampleT ;
     out_msg.header.frame_id = ID;
     ci->header.frame_id = out_msg.header.frame_id;
@@ -184,7 +186,10 @@ int main(int argc, char** argv) {
 
     int publishComplete = 1;
     int threadCount =0;
-
+    int shouldCorrect = 1;
+    if(argc > 1){
+        shouldCorrect = atoi(argv[1]);
+    }
     cv::Mat map1;
     cv::Mat map2;
     //one serial implenetation to fill mats
@@ -198,8 +203,17 @@ int main(int argc, char** argv) {
         if(publishComplete && threadCount < 2){
             cap >> frame0;
             ros::Time sampleT = ros::Time::now();
-            std::thread publishThread = std::thread(serialThread,std::ref(imagePubR), frame0,std::ref(publishComplete), "camera", cinfo_R,std::ref(map1),std::ref(map2), std::ref(threadCount),sampleT);
-            publishThread.detach();
+            if(shouldCorrect){
+                std::thread publishThread = std::thread(serialThread,std::ref(imagePubR), frame0,std::ref(publishComplete), "camera", cinfo_R,std::ref(map1),std::ref(map2), std::ref(threadCount),sampleT,shouldCorrect);
+                publishThread.detach();
+            }
+            else {
+                std::thread publishThread = std::thread(serialThread,std::ref(imagePubL), frame0,std::ref(publishComplete), "camera", cinfo_L,std::ref(map1),std::ref(map2), std::ref(threadCount),sampleT,shouldCorrect);
+                publishThread.detach();
+            }
+
+
+
         }
 
 
