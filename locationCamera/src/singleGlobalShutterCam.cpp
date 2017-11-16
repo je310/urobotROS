@@ -56,9 +56,12 @@ cv::Mat myUndistort(cv::Mat &input,cv::Mat &map1,cv::Mat &map2){
     cv::Mat output;
     cv::Mat R;
     remap(input, output, map1,map2, cv::INTER_LINEAR, cv::BORDER_CONSTANT);
+//    for(int i = 0 ; i < 10000000; i++){
+
+//    }
     return output;
 }
-void pubImage(image_transport::CameraPublisher& image_pub_, cv::Mat image,int&ready, std::string ID,boost::shared_ptr<camera_info_manager::CameraInfoManager> cinfo_){
+void pubImage(image_transport::CameraPublisher& image_pub_, cv::Mat image,int&ready, std::string ID,boost::shared_ptr<camera_info_manager::CameraInfoManager> cinfo_, int &buffer){
     cv_bridge::CvImage out_msg;
 
     sensor_msgs::CameraInfoPtr ci(new sensor_msgs::CameraInfo(cinfo_->getCameraInfo()));
@@ -77,13 +80,46 @@ void pubImage(image_transport::CameraPublisher& image_pub_, cv::Mat image,int&re
     image_pub_.publish(*out_msg.toImageMsg(),*ci);
 
     ready = 1;
-
+    buffer = 1-buffer;
     return;
 }
 
-void undistortThread(cv::Mat image,cv::Mat &out,cv::Mat &map1,cv::Mat &map2, int &ready){
+void undistortThread(cv::Mat image,cv::Mat &out,cv::Mat &map1,cv::Mat &map2, int &ready, int &buffer){
     out = myUndistort(image,map1,map2);
     ready = 1;
+    buffer = 1-buffer;
+}
+
+void collectImThread(cv::VideoCapture vid,cv::Mat &image, int &ready, int &frameNumber){
+    vid >> image;
+    frameNumber++;
+    ready = 1;
+}
+
+void serialThread(image_transport::CameraPublisher& image_pub_, cv::Mat image,int&ready, std::string ID,boost::shared_ptr<camera_info_manager::CameraInfoManager> cinfo_,cv::Mat &map1,cv::Mat &map2,int &threadCount){
+    threadCount++;
+    cv::Mat imCopy;
+    image.copyTo(imCopy);
+    cv_bridge::CvImage out_msg;
+
+    sensor_msgs::CameraInfoPtr ci(new sensor_msgs::CameraInfo(cinfo_->getCameraInfo()));
+
+
+
+    out_msg.encoding = sensor_msgs::image_encodings::RGB8;
+
+    out_msg.image = myUndistort(imCopy,map1,map2);;
+    out_msg.header.stamp = ros::Time::now();
+    out_msg.header.frame_id = ID;
+    ci->header.frame_id = out_msg.header.frame_id;
+    ci->header.stamp = out_msg.header.stamp;
+
+
+    image_pub_.publish(*out_msg.toImageMsg(),*ci);
+
+    ready = 1;
+    threadCount --;
+    return;
 }
 
 
@@ -141,49 +177,30 @@ int main(int argc, char** argv) {
 
 
 
-    cv::Mat frameL;
+    cv::Mat frame0, frame1; // double buffered read.
+    cv::Mat convert0, convert1;
 
     cv::waitKey(1);
-    int LeftReady = 1;
-    int corrected = 1;
-    int correctedPub = 1;
 
-    int state = 0;
+    int publishComplete = 1;
+    int threadCount =0;
 
-    int frameNum = 0;
-    int lastFrameCorection = 0;
-    int lastFrameCorPub = 0;
     cv::Mat map1;
     cv::Mat map2;
-    cap >> frameL;
-    InitmyUndistort(frameL,cinfo_L,map1,map2);
+    //one serial implenetation to fill mats
+    cap >> frame0;
+    cap >> frame1;
+    InitmyUndistort(frame0,cinfo_L,map1,map2);
+    unDistIm = myUndistort(frame0,map1,map2);
     while(ros::ok()){
 
-
-        if(LeftReady == 1){
-            frameNum++;
-            cap >> frameL; // get a new frame from camera
-            LeftReady = 0;
-            std::thread fullResThread = std::thread(pubImage,std::ref(imagePubL),frameL,std::ref(LeftReady),"camera",cinfo_L);
-            fullResThread.detach();
-        }
-        if(frameL.cols != 0 && corrected && frameNum != lastFrameCorection){
-            lastFrameCorection = frameNum;
-            corrected = 0;
-            std::thread correctedThread = std::thread(undistortThread,frameL,std::ref(unDistIm),std::ref(map1),std::ref(map2),std::ref(corrected));
-            correctedThread.detach();
-            //
-        }
-        if(unDistIm.cols != 0 && correctedPub && frameNum != lastFrameCorPub){
-            lastFrameCorPub = frameNum;
-            correctedPub = 0;
-            std::thread corectedPubThread = std::thread(pubImage,std::ref(imagePubR),unDistIm,std::ref(correctedPub),"camera",cinfo_R);
-            corectedPubThread.detach();
-            cv::imshow("corrected",unDistIm);
+        cap >> frame0;
+        if(publishComplete && threadCount < 2){
+            std::thread publishThread = std::thread(serialThread,std::ref(imagePubR), frame0,std::ref(publishComplete), "corrected_camera", cinfo_R,std::ref(map1),std::ref(map2), std::ref(threadCount));
+            publishThread.detach();
         }
 
 
-        cv::waitKey(1);
         ros::spinOnce();
 
     }
