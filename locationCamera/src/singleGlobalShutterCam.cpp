@@ -187,6 +187,7 @@ int main(int argc, char** argv) {
     int publishComplete = 1;
     int threadCount =0;
     int shouldCorrect = 1;
+    int count = 0;
     if(argc > 1){
         shouldCorrect = atoi(argv[1]);
     }
@@ -197,16 +198,23 @@ int main(int argc, char** argv) {
     cap >> frame1;
     InitmyUndistort(frame0,cinfo_L,map1,map2);
     unDistIm = myUndistort(frame0,map1,map2);
-    ros::Rate rate(100);
+    ros::Rate rate(31);
     while(ros::ok()){
 
 
         if(publishComplete && threadCount < 2){
+            count++;
             cap >> frame0;
             ros::Time sampleT = ros::Time::now();
             if(shouldCorrect){
+                if(count %2 == 0){
                 std::thread publishThread = std::thread(serialThread,std::ref(imagePubR), frame0,std::ref(publishComplete), "camera", cinfo_R,std::ref(map1),std::ref(map2), std::ref(threadCount),sampleT,shouldCorrect);
                 publishThread.detach();
+                }
+                if(count %2 == 1){
+                std::thread publishThread = std::thread(serialThread,std::ref(imagePubL), frame0,std::ref(publishComplete), "camera", cinfo_R,std::ref(map1),std::ref(map2), std::ref(threadCount),sampleT,shouldCorrect);
+                publishThread.detach();
+                }
             }
             else {
                 std::thread publishThread = std::thread(serialThread,std::ref(imagePubL), frame0,std::ref(publishComplete), "camera", cinfo_L,std::ref(map1),std::ref(map2), std::ref(threadCount),sampleT,shouldCorrect);
