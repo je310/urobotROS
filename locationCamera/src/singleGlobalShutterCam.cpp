@@ -197,6 +197,7 @@ int main(int argc, char** argv) {
     cap >> frame1;
     InitmyUndistort(frame0,cinfo_L,map1,map2);
     unDistIm = myUndistort(frame0,map1,map2);
+    ros::Rate rate(100);
     while(ros::ok()){
 
 
@@ -216,8 +217,9 @@ int main(int argc, char** argv) {
 
         }
 
-
+        rate.sleep();
         ros::spinOnce();
+
 
     }
 
