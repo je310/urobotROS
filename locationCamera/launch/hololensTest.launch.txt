@@ -1,0 +1,15 @@
+<launch>
+	<node name="cams" pkg="locationCamera" type="globalShutterCam" />
+        <arg name="marker_size" default="2.471" />
+        <arg name="max_new_marker_error" default="0.08" />
+        <arg name="max_track_error" default="0.2" />
+
+        <arg name="cam_image_topic" default="/left/image" />
+        <arg name="cam_info_topic" default="/left/camera_info" />
+
+        <arg name="output_frame" value="/Left" />
+        <arg name="bundle_files" default="$(find locationCamera)/bundle/calibrated.xml" />
+        <node name="rviz" pkg="rviz" type="rviz" />
+
+<node name="ar_track_alvar" pkg="ar_track_alvar" type="findMarkerBundlesNoKinect"  respawn="false" output="screen" args="$(arg marker_size) $(arg max_new_marker_error) $(arg max_track_error) $(arg cam_image_topic) $(arg cam_info_topic) $(arg output_frame) $(arg bundle_files) " />
+</launch>
