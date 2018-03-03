@@ -6,7 +6,7 @@
 
 #include <sstream>
 
-ros::Publisher rob0pub,rob1pub,rob2pub,rob3pub,fightpub,linePub;
+ros::Publisher rob0pub,rob1pub,rob2pub,rob3pub,fightpub,linePub,special1Pub;
 float rob0Lin, rob0Ang,rob1Lin, rob1Ang,rob2Lin, rob2Ang,rob3Lin, rob3Ang;
 void joyCB(sensor_msgs::JoyConstPtr msg){
     // robot0 left d pad.
@@ -21,6 +21,11 @@ void joyCB(sensor_msgs::JoyConstPtr msg){
         std_msgs::String lineMsg;
         lineMsg.data = "follow";
         linePub.publish(lineMsg);
+    }
+    if(msg->buttons[6]==1){
+        std_msgs::String special1Msg;
+        special1Msg.data = "special1";
+        special1Pub.publish(special1Msg);
     }
 
     rob2Lin = msg->axes[6];
@@ -57,6 +62,7 @@ int main(int argc, char **argv)
   rob3pub = n.advertise<geometry_msgs::Twist>("rob3",1);
   fightpub = n.advertise<std_msgs::String>("fight",1);
   linePub = n.advertise<std_msgs::String>("follow",1);
+  special1Pub = n.advertise<std_msgs::String>("special1",1);
 
   ros::Rate loop_rate(20);
 

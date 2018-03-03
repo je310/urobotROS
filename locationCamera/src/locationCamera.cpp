@@ -26,22 +26,22 @@
 #include <math.h>
 #include <unistd.h>
 
-int FLowH = 94;
-int FHighH = 154;
+int FLowH = 74;
+int FHighH = 131;
 
 int FLowS = 9;
 int FHighS = 255;
 
-int FLowV = 94;
+int FLowV = 103;
 int FHighV = 255;
 
-int LLowH = 16;
-int LHighH = 53;
+int LLowH = 0;
+int LHighH = 119;
 
 int LLowS = 0;
 int LHighS = 255;
 
-int LLowV = 30;
+int LLowV = 0;
 int LHighV = 255;
 tf::Vector3 cvToVec(cv::Point3d in);
 float findAngle(tf::Vector3 one, tf::Vector3 two);
@@ -94,10 +94,10 @@ void imageCB(sensor_msgs::ImageConstPtr im){
     cv::Mat element = getStructuringElement(cv::MORPH_CROSS,
                                             cv::Size(2 * erosion_size + 1, 2 * erosion_size + 1),
                                             cv::Point(erosion_size, erosion_size) );
-    cv::erode(FimgThresholded,FimgThresholded,element);
-    cv::dilate(FimgThresholded,FimgThresholded,element);
-    cv::erode(LimgThresholded,LimgThresholded,element);
-    cv::dilate(LimgThresholded,LimgThresholded,element);
+//    cv::erode(FimgThresholded,FimgThresholded,element);
+  //  cv::dilate(FimgThresholded,FimgThresholded,element);
+  //  cv::erode(LimgThresholded,LimgThresholded,element);
+   // cv::dilate(LimgThresholded,LimgThresholded,element);
 //     cv::threshold(FimgThresholded, FimgThresholded, 0.5, 255,cv::THRESH_BINARY_INV);
 //     cv::threshold(LimgThresholded, LimgThresholded, 0.5, 255,cv::THRESH_BINARY_INV);
     cv::imshow("Front",FimgThresholded);
@@ -333,11 +333,14 @@ void imageCB(sensor_msgs::ImageConstPtr im){
     //construct transforms for pairs
 
     //publish transforms
-    for(int i =0; i < trackingList.size(); i ++){
-        std::stringstream ss;
-        ss << "robot" << i;
-        trackingList[i].guessPos.child_frame_id_ = ss.str();
-        brPtr->sendTransform(trackingList[i].guessPos);
+    if(!initialising){
+        for(int i =0; i < trackingList.size(); i ++){
+            std::stringstream ss;
+            ss << "robot" << i;
+            trackingList[i].guessPos.child_frame_id_ = ss.str();
+            trackingList[i].guessPos.frame_id_= "ar_marker_3";
+            brPtr->sendTransform(trackingList[i].guessPos);
+        }
     }
 
 

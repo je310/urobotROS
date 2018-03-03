@@ -70,7 +70,7 @@ int main(int argc, char** argv) {
         bool gotMarker;
         try{
             static int good =0;
-        gotMarker = listenerPtr->waitForTransform("/camera","/ar_marker_3",sentImageTime,ros::Duration(0.2));
+        gotMarker = listenerPtr->waitForTransform("/camera","/ar_marker_3",sentImageTime,ros::Duration(1));
         if(finishedProcTime != sentImageTime){
             //ros::Duration(0.2).sleep();
         }
