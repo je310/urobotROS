@@ -1,5 +1,6 @@
 <launch>
 	<node name="joypad" pkg="joy" type="joy_node"/>
 	<node name="interpret" pkg="urobotCom" type ="joy_interpret"/>
+        <remap from="/turtle3/cmd_vel" to="/rob0"/>
        <node name="irSender" pkg="urobotCom" type="ircom.py"/>
 </launch>
