@@ -84,6 +84,16 @@ def fightCB(data):
         typeTemp = 9
         robotsTemp = 4
 
+def followCB(data):
+    global typeTemp
+    if data.data == 'follow':
+        typeTemp =4
+
+def special1CB(data):
+    global typeTemp
+    if data.data == 'special1':
+        typeTemp =3
+
 
 
 #    print rot, lin
@@ -111,6 +121,8 @@ def talker():
     rospy.Subscriber("rob2", Twist, rob2CB)
     rospy.Subscriber("rob3", Twist, rob3CB)
     rospy.Subscriber("fight", String, fightCB)
+    rospy.Subscriber("follow", String, followCB)
+    rospy.Subscriber("special1", String, special1CB)
     serdev = '/dev/ttyACM0'
     master = serial.Serial(
     port=serdev,
@@ -120,33 +132,35 @@ def talker():
     bytesize=serial.EIGHTBITS,
     timeout = 0.1,
     rtscts=0,
-     write_timeout=0.01
+     write_timeout=0.1
     )
 
     while not rospy.is_shutdown():
         type = typeTemp
         robots = robotsTemp
         msgs = [rob0,rob1,rob2,rob3]
-        #print msgs
+        print msgs
+	try:
+		#send header. 2 bytes
+		master.write(chr(header))
+		master.write(chr(header))
 
-        #send header. 2 bytes
-        master.write(chr(header))
-        master.write(chr(header))
+		#send robot number
+		master.write(chr(robots))
+		master.write(chr(255-robots))
 
-        #send robot number
-        master.write(chr(robots))
-        master.write(chr(255-robots))
+		#send type (move, report batt voltage etc)
+		master.write(chr(type))
+		print type
+		#Send the command value for each robot
+		for x in range(0, robots):
+		    master.write(chr(msgs[x]))
 
-        #send type (move, report batt voltage etc)
-        master.write(chr(type))
-
-        #Send the command value for each robot
-        for x in range(0, robots):
-            master.write(chr(msgs[x]))
-
-        #send the checksum
-        checksum = generateChecksum(header,robots,type,msgs)
-        master.write(chr(checksum))
+		#send the checksum
+		checksum = generateChecksum(header,robots,type,msgs)
+		master.write(chr(checksum))
+	except:
+		pass
 
         #if special fight command may need to wait a while, wait for confirmation from master.
         loopcount = 0
