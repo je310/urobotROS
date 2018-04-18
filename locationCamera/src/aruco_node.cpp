@@ -12,6 +12,7 @@
 
 using namespace cv;
 using namespace aruco;
+using namespace std;
 
     float markerSize = 0.04;
     aruco::CameraParameters params;

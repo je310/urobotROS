@@ -12,6 +12,8 @@
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/highgui.hpp"
 #include "opencv2/xfeatures2d.hpp"
+#include <ros/ros.h>
+#include <ros/package.h>
 using namespace std;
 using namespace cv;
 using namespace cv::xfeatures2d;
@@ -22,12 +24,21 @@ void readme();
  */
 int main( int argc, char** argv )
 {
+    ros::init(argc, argv, "robotFinder");
+    ros::NodeHandle node;
+
 //  if( argc != 3 )
 //  { readme(); return -1; }
 //  Mat img_1 = imread( argv[1], IMREAD_GRAYSCALE );
 //  Mat img_2 = imread( argv[2], IMREAD_GRAYSCALE );
-  Mat img_1 = imread( "/home/josh/urobot_ws/src/locationCamera/images/image3.png", IMREAD_GRAYSCALE );
-  Mat img_2 = imread( "/home/josh/urobot_ws/src/locationCamera/images/temp.png", IMREAD_GRAYSCALE );
+    string path = ros::package::getPath("locationCamera");
+    stringstream ss;
+    ss << path << "/images/image3.png";
+  Mat img_1 = imread( ss.str(), IMREAD_GRAYSCALE );
+  ss.str("");
+  ss << path << "/images/temp.png";
+  cout << ss.str();
+  Mat img_2 = imread( ss.str(), IMREAD_GRAYSCALE );
   if( !img_1.data || !img_2.data )
   { std::cout<< " --(!) Error reading images " << std::endl; return -1; }
   //-- Step 1: Detect the keypoints using SURF Detector, compute the descriptors
