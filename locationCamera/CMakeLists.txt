@@ -15,6 +15,10 @@ find_package(catkin REQUIRED COMPONENTS
   camera_info_manager
 )
 
+SET(CMAKE_MODULE_PATH /usr/local/lib/cmake/ )
+find_package(aruco REQUIRED )
+find_package(OpenCV)
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -140,7 +144,10 @@ add_executable(cameraLimiter src/cameraLimiter.cpp)
 add_executable(globalShutterCam src/globalShutterCam.cpp)
 add_executable(singleGlobalShutterCam src/singleGlobalShutterCam.cpp)
 add_executable(calibrateMarkers src/calibrateMarkers.cpp)
-
+add_executable(aruco_node src/aruco_node.cpp)
+add_executable(markerPose src/markerPose.cpp)
+add_executable(markerAgr src/markerAgr.cpp)
+add_executable(matcher src/matcher.cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(locationCamera_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
@@ -149,6 +156,9 @@ add_executable(calibrateMarkers src/calibrateMarkers.cpp)
  target_link_libraries(locationCamera_node
    ${catkin_LIBRARIES}
  )
+target_link_libraries(matcher
+  ${catkin_LIBRARIES}
+)
 target_link_libraries(cameraLimiter
   ${catkin_LIBRARIES}
 )
@@ -161,6 +171,23 @@ target_link_libraries(calibrateMarkers
 )
 target_link_libraries(singleGlobalShutterCam
   ${catkin_LIBRARIES}
+)
+
+target_link_libraries(aruco_node
+  ${catkin_LIBRARIES}
+  ${aruco_LIBS}
+   ${OpenCV_LIBS}
+)
+
+target_link_libraries(markerPose
+  ${catkin_LIBRARIES}
+  ${aruco_LIBS}
+   ${OpenCV_LIBS}
+)
+target_link_libraries(markerAgr
+  ${catkin_LIBRARIES}
+  ${aruco_LIBS}
+   ${OpenCV_LIBS}
 )
 
 
