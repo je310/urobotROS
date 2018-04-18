@@ -186,7 +186,7 @@ int main(int argc, char** argv) {
 
     int publishComplete = 1;
     int threadCount =0;
-    int shouldCorrect = 1;
+    int shouldCorrect = 0;
     int count = 0;
     if(argc > 1){
         shouldCorrect = atoi(argv[1]);
@@ -220,6 +220,7 @@ int main(int argc, char** argv) {
                 std::thread publishThread = std::thread(serialThread,std::ref(imagePubL), frame0,std::ref(publishComplete), "camera", cinfo_L,std::ref(map1),std::ref(map2), std::ref(threadCount),sampleT,shouldCorrect);
                 publishThread.detach();
             }
+
 
 
 
