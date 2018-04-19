@@ -1,4 +1,5 @@
 #include <ros/ros.h>
+#include <ros/package.h>
 #include <std_msgs/Bool.h>
 #include <std_msgs/Time.h>
 #include <sensor_msgs/Joy.h>
@@ -130,10 +131,16 @@ int main(int argc, char** argv) {
     ros::NodeHandle node;
     image_transport::ImageTransport it_(node);
 
-
+    bool shouldRecordToFile = 0;
+    std::string recPath;
     image_transport::CameraPublisher imagePubL,imagePubR;
     imagePubL = it_.advertiseCamera("camera/image/", 1);
     imagePubR = it_.advertiseCamera("camera_corrected/image/", 1);
+
+    if(argc > 1){
+        shouldRecordToFile = 1;
+        recPath = ros::package::getPath("locationCamera");
+    }
 
     cv::VideoCapture cap(0);
 
@@ -219,8 +226,15 @@ int main(int argc, char** argv) {
             else {
                 std::thread publishThread = std::thread(serialThread,std::ref(imagePubL), frame0,std::ref(publishComplete), "camera", cinfo_L,std::ref(map1),std::ref(map2), std::ref(threadCount),sampleT,shouldCorrect);
                 publishThread.detach();
-            }
 
+            }
+            if(shouldRecordToFile == 1){
+                std::stringstream ss;
+                ss <<recPath<< "/savedimg/" << count << ".jpg";
+                //cv::cvtColor(frame0, frame0, cv::COLOR_GRAY2BGR);
+                cv::imwrite(ss.str(),frame0);
+                cv::waitKey(50);
+            }
 
 
 
