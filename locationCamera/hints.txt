@@ -1,0 +1,4 @@
+opencv_annotation --annotations=/home/josh/urobot_ws/src/locationCamera/annotations.txt --images=/home/josh/urobot_ws/src/locationCamera/savedimg/
+opencv_createsamples -info annotations.txt -vec positiveVec.vec
+opencv_traincascade -data trained/ -vec positiveVec.vec -bg background.txt -numPos 30 -numNeg 10
+should make it so that it does not over train.
