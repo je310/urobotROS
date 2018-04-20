@@ -1,94 +1,315 @@
-/home/josh/urobot_ws/src/locationCamera/savedimg/1.jpg 2 227 139 40 48 301 40 55 53
-/home/josh/urobot_ws/src/locationCamera/savedimg/10.jpg 2 194 157 44 55 269 55 54 48
-/home/josh/urobot_ws/src/locationCamera/savedimg/11.jpg 3 186 181 45 43 265 70 50 50 544 0 50 27
-/home/josh/urobot_ws/src/locationCamera/savedimg/12.jpg 3 169 200 44 48 534 2 60 34 265 85 47 51
-/home/josh/urobot_ws/src/locationCamera/savedimg/13.jpg 3 191 234 47 50 280 123 50 46 556 12 42 49
-/home/josh/urobot_ws/src/locationCamera/savedimg/14.jpg 2 277 261 54 48 364 143 51 58
-/home/josh/urobot_ws/src/locationCamera/savedimg/15.jpg 3 231 284 66 57 332 155 54 48 607 20 31 55
-/home/josh/urobot_ws/src/locationCamera/savedimg/16.jpg 3 236 329 59 54 313 166 50 57 608 36 30 58
-/home/josh/urobot_ws/src/locationCamera/savedimg/17.jpg 2 271 297 58 59 346 151 52 55
-/home/josh/urobot_ws/src/locationCamera/savedimg/18.jpg 3 221 289 50 49 292 159 48 49 561 60 55 44
-/home/josh/urobot_ws/src/locationCamera/savedimg/19.jpg 3 221 280 41 43 292 154 42 45 559 61 46 46
-/home/josh/urobot_ws/src/locationCamera/savedimg/2.jpg 2 222 136 50 59 309 42 45 51
-/home/josh/urobot_ws/src/locationCamera/savedimg/20.jpg 3 200 248 47 58 271 117 46 50 537 21 52 48
-/home/josh/urobot_ws/src/locationCamera/savedimg/21.jpg 2 252 199 53 51 326 59 45 51
-/home/josh/urobot_ws/src/locationCamera/savedimg/22.jpg 2 315 193 51 66 382 55 52 46
-/home/josh/urobot_ws/src/locationCamera/savedimg/23.jpg 2 317 171 57 59 390 23 48 52
-/home/josh/urobot_ws/src/locationCamera/savedimg/24.jpg 2 337 165 51 58 410 10 55 51
-/home/josh/urobot_ws/src/locationCamera/savedimg/25.jpg 2 278 208 59 67 361 43 64 53
-/home/josh/urobot_ws/src/locationCamera/savedimg/26.jpg 2 290 222 51 61 365 64 55 55
-/home/josh/urobot_ws/src/locationCamera/savedimg/27.jpg 2 323 197 53 49 423 41 53 49
-/home/josh/urobot_ws/src/locationCamera/savedimg/28.jpg 2 396 201 53 58 500 43 50 50
-/home/josh/urobot_ws/src/locationCamera/savedimg/29.jpg 2 363 195 54 52 472 39 51 49
-/home/josh/urobot_ws/src/locationCamera/savedimg/3.jpg 2 222 140 52 49 306 43 50 48
-/home/josh/urobot_ws/src/locationCamera/savedimg/30.jpg 2 396 214 55 54 502 61 53 46
-/home/josh/urobot_ws/src/locationCamera/savedimg/31.jpg 2 328 213 50 53 388 11 54 50
-/home/josh/urobot_ws/src/locationCamera/savedimg/32.jpg 2 326 229 49 51 276 3 49 44
-/home/josh/urobot_ws/src/locationCamera/savedimg/33.jpg 2 220 243 50 45 181 10 47 48
-/home/josh/urobot_ws/src/locationCamera/savedimg/34.jpg 3 144 220 51 47 128 1 42 50 529 0 51 41
-/home/josh/urobot_ws/src/locationCamera/savedimg/35.jpg 2 138 232 49 47 119 13 48 49
-/home/josh/urobot_ws/src/locationCamera/savedimg/36.jpg 2 98 253 46 51 72 32 50 45
-/home/josh/urobot_ws/src/locationCamera/savedimg/37.jpg 3 117 258 47 53 89 28 47 62 499 71 56 47
-/home/josh/urobot_ws/src/locationCamera/savedimg/38.jpg 3 240 226 42 43 213 3 43 51 610 33 29 57
-/home/josh/urobot_ws/src/locationCamera/savedimg/39.jpg 1 281 197 48 44
-/home/josh/urobot_ws/src/locationCamera/savedimg/4.jpg 2 226 141 47 45 304 44 52 48
-/home/josh/urobot_ws/src/locationCamera/savedimg/40.jpg 1 324 182 50 50
-/home/josh/urobot_ws/src/locationCamera/savedimg/41.jpg 1 355 164 51 52
-/home/josh/urobot_ws/src/locationCamera/savedimg/42.jpg 2 350 207 50 51 314 1 45 24
-/home/josh/urobot_ws/src/locationCamera/savedimg/43.jpg 2 295 208 43 42 264 0 43 40
-/home/josh/urobot_ws/src/locationCamera/savedimg/44.jpg 3 240 193 43 42 564 49 41 34 225 1 40 36
-/home/josh/urobot_ws/src/locationCamera/savedimg/45.jpg 3 207 173 46 46 201 1 40 31 517 48 43 37
-/home/josh/urobot_ws/src/locationCamera/savedimg/46.jpg 2 206 166 49 40 517 38 38 35
-/home/josh/urobot_ws/src/locationCamera/savedimg/47.jpg 3 174 182 51 48 503 37 39 42 223 16 38 42
-/home/josh/urobot_ws/src/locationCamera/savedimg/48.jpg 3 153 190 44 46 189 16 47 46 489 27 41 40
-/home/josh/urobot_ws/src/locationCamera/savedimg/49.jpg 3 131 277 45 55 159 72 56 54 506 70 50 49
-/home/josh/urobot_ws/src/locationCamera/savedimg/5.jpg 2 223 145 50 57 306 48 54 52
-/home/josh/urobot_ws/src/locationCamera/savedimg/50.jpg 3 150 260 56 54 186 55 60 59 529 52 53 51
-/home/josh/urobot_ws/src/locationCamera/savedimg/51.jpg 3 180 321 64 57 181 99 61 60 538 74 64 61
-/home/josh/urobot_ws/src/locationCamera/savedimg/52.jpg 3 171 151 70 64 189 387 61 70 570 106 57 65
-/home/josh/urobot_ws/src/locationCamera/savedimg/53.jpg 2 171 200 62 68 594 168 44 69
-/home/josh/urobot_ws/src/locationCamera/savedimg/54.jpg 2 10 346 67 58 580 185 56 63
-/home/josh/urobot_ws/src/locationCamera/savedimg/55.jpg 2 2 408 58 49 568 179 64 74
-/home/josh/urobot_ws/src/locationCamera/savedimg/56.jpg 2 3 397 62 66 584 195 51 62
-/home/josh/urobot_ws/src/locationCamera/savedimg/57.jpg 1 2 420 43 53
-/home/josh/urobot_ws/src/locationCamera/savedimg/58.jpg 2 215 216 55 71 4 423 63 54
-/home/josh/urobot_ws/src/locationCamera/savedimg/59.jpg 2 280 159 72 79 60 385 72 66
-/home/josh/urobot_ws/src/locationCamera/savedimg/6.jpg 2 222 126 50 54 302 36 54 51
-/home/josh/urobot_ws/src/locationCamera/savedimg/60.jpg 3 392 74 80 65 172 289 71 72 333 403 68 73
-/home/josh/urobot_ws/src/locationCamera/savedimg/61.jpg 3 238 231 68 65 454 13 76 71 394 339 69 69
-/home/josh/urobot_ws/src/locationCamera/savedimg/62.jpg 3 471 26 66 61 272 225 68 61 415 323 62 69
-/home/josh/urobot_ws/src/locationCamera/savedimg/63.jpg 3 484 52 55 60 308 216 52 58 433 305 51 67
-/home/josh/urobot_ws/src/locationCamera/savedimg/64.jpg 3 311 176 45 51 470 31 51 53 422 256 44 55
-/home/josh/urobot_ws/src/locationCamera/savedimg/65.jpg 3 276 212 58 47 393 268 53 53 441 41 57 49
-/home/josh/urobot_ws/src/locationCamera/savedimg/66.jpg 3 403 60 48 51 355 280 45 59 241 350 53 43
-/home/josh/urobot_ws/src/locationCamera/savedimg/67.jpg 3 378 62 55 51 331 294 52 52 218 369 53 44
-/home/josh/urobot_ws/src/locationCamera/savedimg/68.jpg 3 341 73 55 52 273 243 52 48 185 382 53 53
-/home/josh/urobot_ws/src/locationCamera/savedimg/69.jpg 3 346 75 60 60 264 199 50 50 205 393 51 54
-/home/josh/urobot_ws/src/locationCamera/savedimg/7.jpg 2 323 30 56 60 249 133 52 58
-/home/josh/urobot_ws/src/locationCamera/savedimg/70.jpg 3 375 86 52 61 285 203 56 50 224 409 59 47
-/home/josh/urobot_ws/src/locationCamera/savedimg/71.jpg 2 260 208 55 45 199 405 56 47
-/home/josh/urobot_ws/src/locationCamera/savedimg/72.jpg 3 353 16 60 59 268 197 51 59 207 407 54 45
-/home/josh/urobot_ws/src/locationCamera/savedimg/73.jpg 3 323 152 54 52 254 348 53 55 418 0 55 25
-/home/josh/urobot_ws/src/locationCamera/savedimg/74.jpg 2 349 71 51 46 265 261 62 48
-/home/josh/urobot_ws/src/locationCamera/savedimg/75.jpg 2 272 188 50 53 345 4 56 48
-/home/josh/urobot_ws/src/locationCamera/savedimg/76.jpg 1 291 114 46 49
-/home/josh/urobot_ws/src/locationCamera/savedimg/77.jpg 1 237 52 57 47
-/home/josh/urobot_ws/src/locationCamera/savedimg/78.jpg 2 157 103 56 50 405 44 62 48
-/home/josh/urobot_ws/src/locationCamera/savedimg/79.jpg 2 353 91 54 56 77 161 67 58
-/home/josh/urobot_ws/src/locationCamera/savedimg/8.jpg 2 271 109 46 59 341 6 63 58
-/home/josh/urobot_ws/src/locationCamera/savedimg/80.jpg 2 377 133 54 56 104 215 58 58
-/home/josh/urobot_ws/src/locationCamera/savedimg/81.jpg 2 433 160 60 55 177 207 60 52
-/home/josh/urobot_ws/src/locationCamera/savedimg/82.jpg 2 240 223 68 58 477 227 61 56
-/home/josh/urobot_ws/src/locationCamera/savedimg/83.jpg 2 295 222 69 63 529 227 60 56
-/home/josh/urobot_ws/src/locationCamera/savedimg/84.jpg 2 289 211 62 49 509 211 59 51
-/home/josh/urobot_ws/src/locationCamera/savedimg/85.jpg 2 297 188 67 54 513 187 58 56
-/home/josh/urobot_ws/src/locationCamera/savedimg/86.jpg 3 292 181 61 49 496 175 61 60 340 1 46 34
-/home/josh/urobot_ws/src/locationCamera/savedimg/87.jpg 3 191 189 62 47 395 197 50 53 245 5 47 45
-/home/josh/urobot_ws/src/locationCamera/savedimg/88.jpg 3 302 213 47 49 114 186 45 53 168 15 45 54
-/home/josh/urobot_ws/src/locationCamera/savedimg/89.jpg 3 90 201 51 58 150 30 47 56 279 233 49 48
-/home/josh/urobot_ws/src/locationCamera/savedimg/9.jpg 2 228 137 48 52 307 32 54 54
-/home/josh/urobot_ws/src/locationCamera/savedimg/90.jpg 3 164 175 45 50 350 200 42 48 224 10 39 50
-/home/josh/urobot_ws/src/locationCamera/savedimg/91.jpg 3 200 159 48 48 383 184 42 42 249 0 55 42
-/home/josh/urobot_ws/src/locationCamera/savedimg/92.jpg 3 219 139 43 51 402 164 38 49 282 2 42 25
-/home/josh/urobot_ws/src/locationCamera/savedimg/93.jpg 2 233 129 39 48 412 156 43 52
-/home/josh/urobot_ws/src/locationCamera/savedimg/94.jpg 2 213 102 51 53 401 127 40 56
+/home/josh/urobot_ws/src/locationCamera/savedimg/1.jpg 2 222 140 45 45 304 43 47 45
+/home/josh/urobot_ws/src/locationCamera/savedimg/10.jpg 2 194 161 44 49 270 58 50 49
+/home/josh/urobot_ws/src/locationCamera/savedimg/11.jpg 2 187 181 42 52 268 71 45 46
+/home/josh/urobot_ws/src/locationCamera/savedimg/12.jpg 2 161 201 52 47 262 88 47 50
+/home/josh/urobot_ws/src/locationCamera/savedimg/13.jpg 2 193 237 43 47 281 123 47 47
+/home/josh/urobot_ws/src/locationCamera/savedimg/14.jpg 2 369 147 46 44 280 262 46 48
+/home/josh/urobot_ws/src/locationCamera/savedimg/15.jpg 1 240 285 51 49
+/home/josh/urobot_ws/src/locationCamera/savedimg/16.jpg 2 236 327 55 58 310 170 55 50
+/home/josh/urobot_ws/src/locationCamera/savedimg/17.jpg 2 276 300 51 53 343 153 54 57
+/home/josh/urobot_ws/src/locationCamera/savedimg/18.jpg 3 219 291 51 47 291 159 48 48 570 61 41 42
+/home/josh/urobot_ws/src/locationCamera/savedimg/19.jpg 3 219 275 47 50 292 153 45 40 557 59 49 50
+/home/josh/urobot_ws/src/locationCamera/savedimg/2.jpg 2 219 139 50 49 303 41 50 49
+/home/josh/urobot_ws/src/locationCamera/savedimg/20.jpg 3 202 250 46 47 274 119 44 45 538 21 51 48
+/home/josh/urobot_ws/src/locationCamera/savedimg/21.jpg 2 255 200 49 52 324 63 43 46
+/home/josh/urobot_ws/src/locationCamera/savedimg/22.jpg 2 317 196 50 53 384 54 45 52
+/home/josh/urobot_ws/src/locationCamera/savedimg/23.jpg 2 320 174 52 54 388 23 50 51
+/home/josh/urobot_ws/src/locationCamera/savedimg/24.jpg 2 330 168 58 59 408 8 54 51
+/home/josh/urobot_ws/src/locationCamera/savedimg/25.jpg 2 276 210 62 62 362 39 57 64
+/home/josh/urobot_ws/src/locationCamera/savedimg/26.jpg 2 285 221 59 60 364 62 54 58
+/home/josh/urobot_ws/src/locationCamera/savedimg/27.jpg 2 327 190 47 55 427 39 45 52
+/home/josh/urobot_ws/src/locationCamera/savedimg/28.jpg 2 397 201 50 51 499 44 52 53
+/home/josh/urobot_ws/src/locationCamera/savedimg/29.jpg 2 367 195 49 52 474 37 50 49
+/home/josh/urobot_ws/src/locationCamera/savedimg/3.jpg 2 222 140 50 47 305 44 50 49
+/home/josh/urobot_ws/src/locationCamera/savedimg/30.jpg 2 396 214 50 51 502 58 49 48
+/home/josh/urobot_ws/src/locationCamera/savedimg/31.jpg 2 327 213 53 50 395 7 46 51
+/home/josh/urobot_ws/src/locationCamera/savedimg/32.jpg 2 322 230 54 53 277 1 48 54
+/home/josh/urobot_ws/src/locationCamera/savedimg/33.jpg 2 179 10 51 49 217 240 54 52
+/home/josh/urobot_ws/src/locationCamera/savedimg/34.jpg 3 149 219 45 50 126 2 44 50 530 2 49 40
+/home/josh/urobot_ws/src/locationCamera/savedimg/35.jpg 2 139 232 45 48 117 14 48 47
+/home/josh/urobot_ws/src/locationCamera/savedimg/36.jpg 2 95 254 49 52 72 29 55 52
+/home/josh/urobot_ws/src/locationCamera/savedimg/37.jpg 3 119 258 49 48 90 31 47 50 500 70 52 44
+/home/josh/urobot_ws/src/locationCamera/savedimg/38.jpg 3 233 225 49 46 208 4 44 47 608 39 31 47
+/home/josh/urobot_ws/src/locationCamera/savedimg/39.jpg 1 277 197 51 46
+/home/josh/urobot_ws/src/locationCamera/savedimg/4.jpg 2 222 141 51 48 305 46 50 46
+/home/josh/urobot_ws/src/locationCamera/savedimg/40.jpg 1 325 182 48 51
+/home/josh/urobot_ws/src/locationCamera/savedimg/41.jpg 1 356 163 53 54
+/home/josh/urobot_ws/src/locationCamera/savedimg/42.jpg 1 349 206 54 53
+/home/josh/urobot_ws/src/locationCamera/savedimg/44.jpg 3 568 47 34 40 240 188 44 49 225 0 44 38
+/home/josh/urobot_ws/src/locationCamera/savedimg/45.jpg 3 205 174 45 44 204 1 32 30 519 50 41 34
+/home/josh/urobot_ws/src/locationCamera/savedimg/46.jpg 2 207 165 41 42 520 39 33 34
+/home/josh/urobot_ws/src/locationCamera/savedimg/47.jpg 3 174 184 46 45 499 38 41 38 222 15 42 44
+/home/josh/urobot_ws/src/locationCamera/savedimg/48.jpg 3 151 189 46 48 192 15 42 47 487 24 43 43
+/home/josh/urobot_ws/src/locationCamera/savedimg/49.jpg 3 128 277 49 52 164 73 48 51 508 67 48 54
+/home/josh/urobot_ws/src/locationCamera/savedimg/5.jpg 2 221 146 51 54 309 49 46 52
+/home/josh/urobot_ws/src/locationCamera/savedimg/50.jpg 3 153 262 49 53 187 58 51 54 529 51 50 53
+/home/josh/urobot_ws/src/locationCamera/savedimg/51.jpg 3 185 322 51 54 183 97 55 61 548 77 51 52
+/home/josh/urobot_ws/src/locationCamera/savedimg/52.jpg 3 190 392 56 63 177 154 61 62 574 111 52 59
+/home/josh/urobot_ws/src/locationCamera/savedimg/53.jpg 2 168 209 65 60 586 168 53 59
+/home/josh/urobot_ws/src/locationCamera/savedimg/54.jpg 2 3 349 70 62 574 188 62 59
+/home/josh/urobot_ws/src/locationCamera/savedimg/55.jpg 2 1 399 60 54 567 185 65 65
+/home/josh/urobot_ws/src/locationCamera/savedimg/56.jpg 2 1 400 63 64 575 192 62 70
+/home/josh/urobot_ws/src/locationCamera/savedimg/58.jpg 2 211 218 64 70 1 428 61 50
+/home/josh/urobot_ws/src/locationCamera/savedimg/59.jpg 2 282 165 66 73 62 385 70 66
+/home/josh/urobot_ws/src/locationCamera/savedimg/6.jpg 2 223 130 47 48 305 35 47 49
+/home/josh/urobot_ws/src/locationCamera/savedimg/60.jpg 3 399 72 68 68 174 292 69 73 325 404 76 73
+/home/josh/urobot_ws/src/locationCamera/savedimg/61.jpg 3 235 227 75 68 458 15 71 65 396 341 65 64
+/home/josh/urobot_ws/src/locationCamera/savedimg/62.jpg 3 272 221 62 63 415 322 61 62 474 28 61 59
+/home/josh/urobot_ws/src/locationCamera/savedimg/63.jpg 3 315 219 45 52 431 308 51 54 485 57 52 50
+/home/josh/urobot_ws/src/locationCamera/savedimg/64.jpg 3 317 176 40 50 422 260 42 43 474 36 45 48
+/home/josh/urobot_ws/src/locationCamera/savedimg/65.jpg 3 282 218 48 46 392 270 49 48 446 48 45 46
+/home/josh/urobot_ws/src/locationCamera/savedimg/66.jpg 2 356 288 40 49 406 58 42 50
+/home/josh/urobot_ws/src/locationCamera/savedimg/67.jpg 3 223 370 45 38 337 293 42 53 380 61 48 54
+/home/josh/urobot_ws/src/locationCamera/savedimg/68.jpg 3 189 382 45 50 280 248 40 47 345 76 49 46
+/home/josh/urobot_ws/src/locationCamera/savedimg/69.jpg 3 207 399 44 51 263 200 50 51 356 82 46 51
+/home/josh/urobot_ws/src/locationCamera/savedimg/7.jpg 2 252 134 44 53 328 39 48 53
+/home/josh/urobot_ws/src/locationCamera/savedimg/70.jpg 3 227 408 49 54 290 206 45 54 377 91 44 50
+/home/josh/urobot_ws/src/locationCamera/savedimg/71.jpg 2 204 405 47 49 267 203 46 51
+/home/josh/urobot_ws/src/locationCamera/savedimg/72.jpg 3 211 405 46 50 272 202 48 53 358 21 57 52
+/home/josh/urobot_ws/src/locationCamera/savedimg/73.jpg 2 254 352 54 54 324 149 52 53
+/home/josh/urobot_ws/src/locationCamera/savedimg/74.jpg 2 275 260 45 47 353 69 44 51
+/home/josh/urobot_ws/src/locationCamera/savedimg/75.jpg 2 275 193 46 45 356 15 42 38
+/home/josh/urobot_ws/src/locationCamera/savedimg/76.jpg 1 292 113 44 46
+/home/josh/urobot_ws/src/locationCamera/savedimg/77.jpg 1 246 52 43 49
+/home/josh/urobot_ws/src/locationCamera/savedimg/78.jpg 2 163 101 50 54 409 42 54 55
+/home/josh/urobot_ws/src/locationCamera/savedimg/79.jpg 2 83 161 57 53 349 90 55 58
+/home/josh/urobot_ws/src/locationCamera/savedimg/8.jpg 2 264 115 52 54 343 13 59 51
+/home/josh/urobot_ws/src/locationCamera/savedimg/80.jpg 2 106 214 52 60 372 128 61 58
+/home/josh/urobot_ws/src/locationCamera/savedimg/81.jpg 2 177 206 58 55 440 159 51 57
+/home/josh/urobot_ws/src/locationCamera/savedimg/82.jpg 2 248 223 57 61 480 226 56 54
+/home/josh/urobot_ws/src/locationCamera/savedimg/83.jpg 2 299 223 54 61 533 225 54 55
+/home/josh/urobot_ws/src/locationCamera/savedimg/84.jpg 2 295 210 50 53 516 212 47 54
+/home/josh/urobot_ws/src/locationCamera/savedimg/85.jpg 2 306 188 51 54 515 190 50 50
+/home/josh/urobot_ws/src/locationCamera/savedimg/86.jpg 3 300 179 47 52 503 180 50 51 334 1 55 36
+/home/josh/urobot_ws/src/locationCamera/savedimg/87.jpg 3 194 186 55 50 392 201 54 44 242 4 53 47
+/home/josh/urobot_ws/src/locationCamera/savedimg/88.jpg 3 113 190 43 51 300 215 49 47 165 14 53 51
+/home/josh/urobot_ws/src/locationCamera/savedimg/89.jpg 3 90 203 47 54 275 232 50 47 150 35 48 43
+/home/josh/urobot_ws/src/locationCamera/savedimg/9.jpg 2 222 136 56 53 307 33 52 49
+/home/josh/urobot_ws/src/locationCamera/savedimg/90.jpg 3 163 176 47 48 346 204 47 44 222 10 43 45
+/home/josh/urobot_ws/src/locationCamera/savedimg/91.jpg 3 200 160 45 47 378 185 47 45 255 1 46 40
+/home/josh/urobot_ws/src/locationCamera/savedimg/92.jpg 2 217 137 45 50 396 166 47 44
+/home/josh/urobot_ws/src/locationCamera/savedimg/93.jpg 2 230 130 45 49 408 158 46 45
+/home/josh/urobot_ws/src/locationCamera/savedimg/94.jpg 2 214 101 44 53 399 132 42 45
+/home/josh/urobot_ws/src/locationCamera/savedimg1/1.jpg 3 271 153 61 61 444 71 61 61 49 303 60 67
+/home/josh/urobot_ws/src/locationCamera/savedimg1/10.jpg 3 117 236 60 66 382 180 64 69 579 174 54 66
+/home/josh/urobot_ws/src/locationCamera/savedimg1/105.jpg 1 418 359 78 82
+/home/josh/urobot_ws/src/locationCamera/savedimg1/106.jpg 2 344 182 68 84 179 352 70 72
+/home/josh/urobot_ws/src/locationCamera/savedimg1/107.jpg 3 427 79 69 76 239 207 79 76 44 411 58 62
+/home/josh/urobot_ws/src/locationCamera/savedimg1/108.jpg 2 214 48 65 75 423 2 73 54
+/home/josh/urobot_ws/src/locationCamera/savedimg1/11.jpg 3 100 249 62 56 373 219 63 68 571 227 57 55
+/home/josh/urobot_ws/src/locationCamera/savedimg1/110.jpg 3 32 20 71 67 316 70 73 71 527 145 73 70
+/home/josh/urobot_ws/src/locationCamera/savedimg1/111.jpg 2 261 108 76 73 436 246 70 76
+/home/josh/urobot_ws/src/locationCamera/savedimg1/112.jpg 2 260 297 70 76 39 91 62 76
+/home/josh/urobot_ws/src/locationCamera/savedimg1/113.jpg 2 146 138 68 73 316 408 74 67
+/home/josh/urobot_ws/src/locationCamera/savedimg1/114.jpg 1 284 254 77 71
+/home/josh/urobot_ws/src/locationCamera/savedimg1/115.jpg 1 308 286 81 76
+/home/josh/urobot_ws/src/locationCamera/savedimg1/116.jpg 1 299 249 83 91
+/home/josh/urobot_ws/src/locationCamera/savedimg1/117.jpg 1 226 209 91 84
+/home/josh/urobot_ws/src/locationCamera/savedimg1/118.jpg 1 231 176 93 97
+/home/josh/urobot_ws/src/locationCamera/savedimg1/12.jpg 3 68 261 67 73 349 259 68 71 551 284 63 69
+/home/josh/urobot_ws/src/locationCamera/savedimg1/120.jpg 1 250 257 104 106
+/home/josh/urobot_ws/src/locationCamera/savedimg1/121.jpg 1 245 263 103 102
+/home/josh/urobot_ws/src/locationCamera/savedimg1/122.jpg 1 231 173 105 107
+/home/josh/urobot_ws/src/locationCamera/savedimg1/123.jpg 1 197 279 95 97
+/home/josh/urobot_ws/src/locationCamera/savedimg1/124.jpg 1 263 205 90 89
+/home/josh/urobot_ws/src/locationCamera/savedimg1/125.jpg 1 4 251 99 89
+/home/josh/urobot_ws/src/locationCamera/savedimg1/126.jpg 2 100 253 95 92 499 173 80 88
+/home/josh/urobot_ws/src/locationCamera/savedimg1/127.jpg 2 3 322 62 87 250 323 88 86
+/home/josh/urobot_ws/src/locationCamera/savedimg1/128.jpg 2 79 309 77 86 336 310 88 83
+/home/josh/urobot_ws/src/locationCamera/savedimg1/129.jpg 2 122 315 66 78 366 315 78 76
+/home/josh/urobot_ws/src/locationCamera/savedimg1/13.jpg 3 49 269 62 69 326 297 72 80 527 356 66 61
+/home/josh/urobot_ws/src/locationCamera/savedimg1/130.jpg 2 134 283 67 75 366 297 77 78
+/home/josh/urobot_ws/src/locationCamera/savedimg1/131.jpg 2 199 223 74 66 425 250 72 72
+/home/josh/urobot_ws/src/locationCamera/savedimg1/132.jpg 2 212 224 63 76 432 254 68 73
+/home/josh/urobot_ws/src/locationCamera/savedimg1/133.jpg 2 191 238 62 69 411 265 71 71
+/home/josh/urobot_ws/src/locationCamera/savedimg1/135.jpg 2 133 271 66 72 345 350 76 67
+/home/josh/urobot_ws/src/locationCamera/savedimg1/136.jpg 3 91 211 72 78 289 330 80 78 564 425 69 53
+/home/josh/urobot_ws/src/locationCamera/savedimg1/137.jpg 2 126 193 72 76 319 334 76 80
+/home/josh/urobot_ws/src/locationCamera/savedimg1/138.jpg 2 156 221 78 78 341 396 84 79
+/home/josh/urobot_ws/src/locationCamera/savedimg1/139.jpg 2 125 209 74 87 312 400 92 79
+/home/josh/urobot_ws/src/locationCamera/savedimg1/14.jpg 3 11 267 68 64 292 330 70 68 492 408 63 64
+/home/josh/urobot_ws/src/locationCamera/savedimg1/140.jpg 2 114 225 94 88 346 394 95 84
+/home/josh/urobot_ws/src/locationCamera/savedimg1/141.jpg 2 62 251 91 92 332 365 103 96
+/home/josh/urobot_ws/src/locationCamera/savedimg1/142.jpg 2 4 337 89 78 276 378 112 84
+/home/josh/urobot_ws/src/locationCamera/savedimg1/143.jpg 2 305 356 89 87 13 394 87 85
+/home/josh/urobot_ws/src/locationCamera/savedimg1/144.jpg 1 341 399 96 75
+/home/josh/urobot_ws/src/locationCamera/savedimg1/145.jpg 1 415 338 91 78
+/home/josh/urobot_ws/src/locationCamera/savedimg1/146.jpg 2 419 313 83 86 584 46 54 80
+/home/josh/urobot_ws/src/locationCamera/savedimg1/147.jpg 2 417 270 86 78 541 2 71 61
+/home/josh/urobot_ws/src/locationCamera/savedimg1/148.jpg 2 459 279 84 75 535 1 72 49
+/home/josh/urobot_ws/src/locationCamera/savedimg1/149.jpg 1 572 232 66 78
+/home/josh/urobot_ws/src/locationCamera/savedimg1/15.jpg 1 222 347 71 71
+/home/josh/urobot_ws/src/locationCamera/savedimg1/16.jpg 2 139 312 74 75 335 422 69 56
+/home/josh/urobot_ws/src/locationCamera/savedimg1/160.jpg 2 298 152 93 87 510 2 90 53
+/home/josh/urobot_ws/src/locationCamera/savedimg1/161.jpg 1 401 95 94 89
+/home/josh/urobot_ws/src/locationCamera/savedimg1/162.jpg 1 423 313 99 89
+/home/josh/urobot_ws/src/locationCamera/savedimg1/163.jpg 2 240 336 99 97 546 220 93 96
+/home/josh/urobot_ws/src/locationCamera/savedimg1/164.jpg 2 395 264 119 104 64 367 117 98
+/home/josh/urobot_ws/src/locationCamera/savedimg1/165.jpg 1 294 273 107 112
+/home/josh/urobot_ws/src/locationCamera/savedimg1/166.jpg 2 307 226 111 106 2 270 68 117
+/home/josh/urobot_ws/src/locationCamera/savedimg1/167.jpg 2 3 217 104 107 315 214 108 98
+/home/josh/urobot_ws/src/locationCamera/savedimg1/168.jpg 3 265 268 97 97 534 217 82 74 4 270 74 97
+/home/josh/urobot_ws/src/locationCamera/savedimg1/169.jpg 2 208 283 81 77 466 225 67 69
+/home/josh/urobot_ws/src/locationCamera/savedimg1/17.jpg 2 121 291 74 74 306 421 72 57
+/home/josh/urobot_ws/src/locationCamera/savedimg1/170.jpg 2 160 256 81 76 418 193 62 63
+/home/josh/urobot_ws/src/locationCamera/savedimg1/171.jpg 2 176 249 70 69 421 191 69 56
+/home/josh/urobot_ws/src/locationCamera/savedimg1/172.jpg 3 485 252 63 61 242 339 72 65 26 362 63 77
+/home/josh/urobot_ws/src/locationCamera/savedimg1/173.jpg 3 203 302 71 67 450 236 62 56 3 313 52 68
+/home/josh/urobot_ws/src/locationCamera/savedimg1/174.jpg 3 427 256 54 54 193 334 60 61 3 351 43 69
+/home/josh/urobot_ws/src/locationCamera/savedimg1/175.jpg 3 411 251 56 52 180 356 68 60 0 402 48 65
+/home/josh/urobot_ws/src/locationCamera/savedimg1/176.jpg 1 386 300 61 54
+/home/josh/urobot_ws/src/locationCamera/savedimg1/177.jpg 1 332 386 57 56
+/home/josh/urobot_ws/src/locationCamera/savedimg1/178.jpg 1 370 371 62 62
+/home/josh/urobot_ws/src/locationCamera/savedimg1/179.jpg 1 415 400 61 64
+/home/josh/urobot_ws/src/locationCamera/savedimg1/18.jpg 2 137 224 75 76 318 370 71 68
+/home/josh/urobot_ws/src/locationCamera/savedimg1/180.jpg 1 437 312 60 58
+/home/josh/urobot_ws/src/locationCamera/savedimg1/181.jpg 1 445 343 63 63
+/home/josh/urobot_ws/src/locationCamera/savedimg1/187.jpg 2 475 123 79 78 300 388 80 77
+/home/josh/urobot_ws/src/locationCamera/savedimg1/188.jpg 2 233 348 87 69 475 140 82 71
+/home/josh/urobot_ws/src/locationCamera/savedimg1/189.jpg 2 306 285 84 69 2 386 89 71
+/home/josh/urobot_ws/src/locationCamera/savedimg1/19.jpg 2 130 221 74 85 309 375 75 75
+/home/josh/urobot_ws/src/locationCamera/savedimg1/190.jpg 1 266 71 83 69
+/home/josh/urobot_ws/src/locationCamera/savedimg1/191.jpg 2 99 108 81 86 447 115 78 77
+/home/josh/urobot_ws/src/locationCamera/savedimg1/192.jpg 2 65 80 93 76 413 96 87 77
+/home/josh/urobot_ws/src/locationCamera/savedimg1/193.jpg 2 82 203 81 85 413 218 86 78
+/home/josh/urobot_ws/src/locationCamera/savedimg1/194.jpg 2 99 174 75 73 420 181 74 70
+/home/josh/urobot_ws/src/locationCamera/savedimg1/195.jpg 2 97 133 80 75 411 149 76 76
+/home/josh/urobot_ws/src/locationCamera/savedimg1/196.jpg 2 77 20 77 74 391 59 86 76
+/home/josh/urobot_ws/src/locationCamera/savedimg1/197.jpg 1 110 50 86 81
+/home/josh/urobot_ws/src/locationCamera/savedimg1/198.jpg 1 122 73 86 85
+/home/josh/urobot_ws/src/locationCamera/savedimg1/199.jpg 1 320 34 87 78
+/home/josh/urobot_ws/src/locationCamera/savedimg1/2.jpg 3 270 158 62 55 452 78 52 56 53 313 54 52
+/home/josh/urobot_ws/src/locationCamera/savedimg1/20.jpg 2 151 241 82 72 335 389 81 63
+/home/josh/urobot_ws/src/locationCamera/savedimg1/200.jpg 2 175 180 86 88 545 183 80 82
+/home/josh/urobot_ws/src/locationCamera/savedimg1/201.jpg 1 346 232 75 82
+/home/josh/urobot_ws/src/locationCamera/savedimg1/202.jpg 2 281 162 80 82 537 195 85 86
+/home/josh/urobot_ws/src/locationCamera/savedimg1/203.jpg 2 174 167 79 79 425 211 93 87
+/home/josh/urobot_ws/src/locationCamera/savedimg1/204.jpg 2 197 123 80 83 450 133 89 86
+/home/josh/urobot_ws/src/locationCamera/savedimg1/205.jpg 2 142 215 80 79 398 226 89 83
+/home/josh/urobot_ws/src/locationCamera/savedimg1/206.jpg 2 42 112 87 72 295 122 82 83
+/home/josh/urobot_ws/src/locationCamera/savedimg1/207.jpg 2 174 180 82 76 477 125 76 76
+/home/josh/urobot_ws/src/locationCamera/savedimg1/208.jpg 2 171 101 78 66 464 43 58 66
+/home/josh/urobot_ws/src/locationCamera/savedimg1/209.jpg 3 0 125 44 53 182 108 69 59 435 57 69 56
+/home/josh/urobot_ws/src/locationCamera/savedimg1/21.jpg 2 196 221 77 74 387 360 78 70
+/home/josh/urobot_ws/src/locationCamera/savedimg1/210.jpg 3 16 157 54 49 194 151 58 56 436 111 61 50
+/home/josh/urobot_ws/src/locationCamera/savedimg1/211.jpg 3 62 156 59 53 247 162 63 56 489 128 60 58
+/home/josh/urobot_ws/src/locationCamera/savedimg1/212.jpg 3 8 132 62 58 207 143 62 61 467 112 60 66
+/home/josh/urobot_ws/src/locationCamera/savedimg1/213.jpg 2 154 150 71 69 435 127 67 70
+/home/josh/urobot_ws/src/locationCamera/savedimg1/214.jpg 2 185 81 74 79 474 86 69 75
+/home/josh/urobot_ws/src/locationCamera/savedimg1/223.jpg 3 0 59 63 68 177 131 66 72 443 201 72 67
+/home/josh/urobot_ws/src/locationCamera/savedimg1/224.jpg 3 7 105 65 54 190 162 81 63 477 195 74 69
+/home/josh/urobot_ws/src/locationCamera/savedimg1/225.jpg 3 52 240 69 64 264 272 74 69 555 265 66 69
+/home/josh/urobot_ws/src/locationCamera/savedimg1/226.jpg 3 3 269 58 72 224 300 90 79 550 286 84 74
+/home/josh/urobot_ws/src/locationCamera/savedimg1/227.jpg 2 155 110 99 84 520 108 86 73
+/home/josh/urobot_ws/src/locationCamera/savedimg1/228.jpg 2 64 63 72 85 324 85 99 89
+/home/josh/urobot_ws/src/locationCamera/savedimg1/229.jpg 2 97 44 91 102 416 43 113 104
+/home/josh/urobot_ws/src/locationCamera/savedimg1/23.jpg 3 266 185 78 76 469 296 72 73 1 80 48 81
+/home/josh/urobot_ws/src/locationCamera/savedimg1/230.jpg 1 266 126 103 103
+/home/josh/urobot_ws/src/locationCamera/savedimg1/231.jpg 2 214 122 77 89 500 120 86 91
+/home/josh/urobot_ws/src/locationCamera/savedimg1/232.jpg 2 141 91 70 84 398 106 91 86
+/home/josh/urobot_ws/src/locationCamera/savedimg1/233.jpg 2 52 73 63 81 294 98 89 78
+/home/josh/urobot_ws/src/locationCamera/savedimg1/234.jpg 2 170 48 87 80 523 34 77 85
+/home/josh/urobot_ws/src/locationCamera/savedimg1/235.jpg 2 70 4 76 78 409 3 94 57
+/home/josh/urobot_ws/src/locationCamera/savedimg1/236.jpg 2 65 9 82 81 410 3 73 82
+/home/josh/urobot_ws/src/locationCamera/savedimg1/237.jpg 2 95 25 78 75 428 15 79 81
+/home/josh/urobot_ws/src/locationCamera/savedimg1/238.jpg 2 127 5 79 80 447 4 79 78
+/home/josh/urobot_ws/src/locationCamera/savedimg1/239.jpg 2 158 2 84 68 469 4 82 64
+/home/josh/urobot_ws/src/locationCamera/savedimg1/24.jpg 3 271 169 78 75 482 267 71 74 2 89 61 71
+/home/josh/urobot_ws/src/locationCamera/savedimg1/240.jpg 2 227 1 71 50 530 17 75 70
+/home/josh/urobot_ws/src/locationCamera/savedimg1/241.jpg 0
+/home/josh/urobot_ws/src/locationCamera/savedimg1/242.jpg 2 65 3 68 68 368 1 74 42
+/home/josh/urobot_ws/src/locationCamera/savedimg1/243.jpg 2 4 143 65 64 298 59 64 63
+/home/josh/urobot_ws/src/locationCamera/savedimg1/244.jpg 1 158 3 61 53
+/home/josh/urobot_ws/src/locationCamera/savedimg1/25.jpg 3 2 82 70 66 287 137 79 68 507 213 71 71
+/home/josh/urobot_ws/src/locationCamera/savedimg1/255.jpg 1 123 109 91 71
+/home/josh/urobot_ws/src/locationCamera/savedimg1/256.jpg 2 72 129 91 72 274 170 87 80
+/home/josh/urobot_ws/src/locationCamera/savedimg1/257.jpg 2 269 116 89 75 459 177 74 74
+/home/josh/urobot_ws/src/locationCamera/savedimg1/258.jpg 2 347 160 71 73 519 204 72 65
+/home/josh/urobot_ws/src/locationCamera/savedimg1/259.jpg 2 324 193 76 72 498 234 78 66
+/home/josh/urobot_ws/src/locationCamera/savedimg1/26.jpg 3 1 89 62 67 280 108 81 65 503 159 73 69
+/home/josh/urobot_ws/src/locationCamera/savedimg1/260.jpg 2 217 139 79 71 400 182 73 76
+/home/josh/urobot_ws/src/locationCamera/savedimg1/261.jpg 3 116 111 77 67 301 154 69 76 583 121 55 73
+/home/josh/urobot_ws/src/locationCamera/savedimg1/262.jpg 3 65 95 82 71 247 150 72 74 538 130 67 70
+/home/josh/urobot_ws/src/locationCamera/savedimg1/263.jpg 3 74 103 78 76 258 163 72 66 552 137 69 74
+/home/josh/urobot_ws/src/locationCamera/savedimg1/264.jpg 2 179 184 76 82 362 234 78 82
+/home/josh/urobot_ws/src/locationCamera/savedimg1/265.jpg 2 276 219 85 74 464 268 78 78
+/home/josh/urobot_ws/src/locationCamera/savedimg1/266.jpg 2 351 208 79 74 528 257 81 80
+/home/josh/urobot_ws/src/locationCamera/savedimg1/267.jpg 2 374 205 75 74 548 257 73 73
+/home/josh/urobot_ws/src/locationCamera/savedimg1/268.jpg 2 248 204 76 78 423 257 79 72
+/home/josh/urobot_ws/src/locationCamera/savedimg1/269.jpg 2 211 215 83 78 392 276 78 72
+/home/josh/urobot_ws/src/locationCamera/savedimg1/27.jpg 3 279 68 69 75 497 105 63 68 1 83 54 66
+/home/josh/urobot_ws/src/locationCamera/savedimg1/270.jpg 2 212 203 85 77 398 258 82 76
+/home/josh/urobot_ws/src/locationCamera/savedimg1/271.jpg 2 237 198 85 79 427 247 74 86
+/home/josh/urobot_ws/src/locationCamera/savedimg1/272.jpg 2 243 216 80 72 423 262 71 71
+/home/josh/urobot_ws/src/locationCamera/savedimg1/273.jpg 2 238 212 73 77 411 256 73 66
+/home/josh/urobot_ws/src/locationCamera/savedimg1/274.jpg 3 164 194 66 74 327 230 68 60 591 177 46 67
+/home/josh/urobot_ws/src/locationCamera/savedimg1/275.jpg 3 129 177 73 69 307 198 64 62 564 116 62 63
+/home/josh/urobot_ws/src/locationCamera/savedimg1/276.jpg 3 134 142 75 72 313 144 66 65 569 47 58 68
+/home/josh/urobot_ws/src/locationCamera/savedimg1/277.jpg 2 180 158 66 65 363 148 66 59
+/home/josh/urobot_ws/src/locationCamera/savedimg1/278.jpg 2 220 185 78 64 404 171 76 67
+/home/josh/urobot_ws/src/locationCamera/savedimg1/279.jpg 2 274 219 75 68 464 214 78 72
+/home/josh/urobot_ws/src/locationCamera/savedimg1/28.jpg 2 259 38 73 68 482 45 59 70
+/home/josh/urobot_ws/src/locationCamera/savedimg1/280.jpg 2 320 180 86 79 518 197 72 74
+/home/josh/urobot_ws/src/locationCamera/savedimg1/29.jpg 2 240 10 70 66 460 2 63 57
+/home/josh/urobot_ws/src/locationCamera/savedimg1/3.jpg 3 449 72 55 64 275 159 59 59 52 310 58 59
+/home/josh/urobot_ws/src/locationCamera/savedimg1/30.jpg 2 1 92 57 65 255 3 77 59
+/home/josh/urobot_ws/src/locationCamera/savedimg1/31.jpg 1 4 79 63 64
+/home/josh/urobot_ws/src/locationCamera/savedimg1/32.jpg 1 42 50 62 60
+/home/josh/urobot_ws/src/locationCamera/savedimg1/36.jpg 1 83 68 51 52
+/home/josh/urobot_ws/src/locationCamera/savedimg1/37.jpg 3 117 194 50 54 349 125 51 52 524 99 48 60
+/home/josh/urobot_ws/src/locationCamera/savedimg1/38.jpg 3 133 298 51 51 364 235 57 52 537 213 47 55
+/home/josh/urobot_ws/src/locationCamera/savedimg1/39.jpg 1 91 56 50 51
+/home/josh/urobot_ws/src/locationCamera/savedimg1/4.jpg 3 278 160 60 59 456 75 51 66 52 313 58 56
+/home/josh/urobot_ws/src/locationCamera/savedimg1/5.jpg 3 302 163 65 73 481 93 55 55 88 322 59 60
+/home/josh/urobot_ws/src/locationCamera/savedimg1/50.jpg 1 138 1 53 35
+/home/josh/urobot_ws/src/locationCamera/savedimg1/51.jpg 2 158 135 45 49 309 128 39 41
+/home/josh/urobot_ws/src/locationCamera/savedimg1/52.jpg 2 162 258 43 43 308 240 36 44
+/home/josh/urobot_ws/src/locationCamera/savedimg1/53.jpg 3 170 305 43 42 311 285 38 46 1 361 33 38
+/home/josh/urobot_ws/src/locationCamera/savedimg1/54.jpg 3 166 325 46 39 311 306 39 40 1 374 37 42
+/home/josh/urobot_ws/src/locationCamera/savedimg1/55.jpg 3 172 322 49 49 312 311 47 41 1 377 39 41
+/home/josh/urobot_ws/src/locationCamera/savedimg1/56.jpg 3 319 325 43 48 174 345 48 45 1 394 38 40
+/home/josh/urobot_ws/src/locationCamera/savedimg1/57.jpg 3 322 318 42 39 180 329 43 47 5 378 34 45
+/home/josh/urobot_ws/src/locationCamera/savedimg1/58.jpg 3 333 274 47 42 191 293 48 43 13 346 40 42
+/home/josh/urobot_ws/src/locationCamera/savedimg1/59.jpg 3 390 241 43 42 250 279 44 41 77 359 42 42
+/home/josh/urobot_ws/src/locationCamera/savedimg1/6.jpg 3 326 149 63 62 499 69 61 62 105 303 61 55
+/home/josh/urobot_ws/src/locationCamera/savedimg1/60.jpg 3 429 219 41 45 292 265 42 40 119 346 40 43
+/home/josh/urobot_ws/src/locationCamera/savedimg1/61.jpg 3 440 196 41 42 302 240 45 43 131 328 42 41
+/home/josh/urobot_ws/src/locationCamera/savedimg1/62.jpg 3 450 187 43 44 312 227 47 52 137 316 42 40
+/home/josh/urobot_ws/src/locationCamera/savedimg1/63.jpg 3 464 189 47 45 328 231 43 45 152 318 42 42
+/home/josh/urobot_ws/src/locationCamera/savedimg1/64.jpg 3 489 181 43 46 346 221 46 44 163 305 49 46
+/home/josh/urobot_ws/src/locationCamera/savedimg1/65.jpg 3 502 179 45 50 354 222 45 42 166 301 47 45
+/home/josh/urobot_ws/src/locationCamera/savedimg1/66.jpg 3 511 189 47 46 361 232 50 43 170 309 47 49
+/home/josh/urobot_ws/src/locationCamera/savedimg1/67.jpg 3 521 195 50 47 364 235 58 52 176 320 44 49
+/home/josh/urobot_ws/src/locationCamera/savedimg1/68.jpg 3 527 223 47 53 370 263 52 57 173 349 44 50
+/home/josh/urobot_ws/src/locationCamera/savedimg1/69.jpg 3 523 217 49 61 361 268 59 49 164 357 49 46
+/home/josh/urobot_ws/src/locationCamera/savedimg1/7.jpg 3 511 68 53 65 331 148 64 57 104 295 59 59
+/home/josh/urobot_ws/src/locationCamera/savedimg1/70.jpg 3 523 257 56 51 361 299 55 54 153 390 58 49
+/home/josh/urobot_ws/src/locationCamera/savedimg1/71.jpg 3 529 280 54 60 361 332 53 53 149 418 51 50
+/home/josh/urobot_ws/src/locationCamera/savedimg1/72.jpg 3 516 293 57 57 345 340 60 54 131 430 54 49
+/home/josh/urobot_ws/src/locationCamera/savedimg1/73.jpg 3 509 300 55 63 330 348 57 58 109 442 56 35
+/home/josh/urobot_ws/src/locationCamera/savedimg1/74.jpg 2 494 317 52 57 308 364 61 54
+/home/josh/urobot_ws/src/locationCamera/savedimg1/75.jpg 2 483 330 57 62 290 372 64 61
+/home/josh/urobot_ws/src/locationCamera/savedimg1/76.jpg 2 465 331 61 60 268 376 64 56
+/home/josh/urobot_ws/src/locationCamera/savedimg1/77.jpg 3 432 272 59 62 231 312 65 60 2 393 47 59
+/home/josh/urobot_ws/src/locationCamera/savedimg1/78.jpg 2 409 224 62 60 204 260 72 70
+/home/josh/urobot_ws/src/locationCamera/savedimg1/79.jpg 2 390 180 65 65 183 224 73 61
+/home/josh/urobot_ws/src/locationCamera/savedimg1/8.jpg 3 362 141 65 59 545 79 53 67 121 270 68 49
+/home/josh/urobot_ws/src/locationCamera/savedimg1/80.jpg 2 177 191 76 65 389 149 64 64
+/home/josh/urobot_ws/src/locationCamera/savedimg1/81.jpg 2 402 174 62 69 186 220 77 68
+/home/josh/urobot_ws/src/locationCamera/savedimg1/82.jpg 2 408 183 66 67 194 221 69 75
+/home/josh/urobot_ws/src/locationCamera/savedimg1/83.jpg 2 198 223 76 71 422 179 68 72
+/home/josh/urobot_ws/src/locationCamera/savedimg1/84.jpg 2 201 253 79 71 442 235 68 73
+/home/josh/urobot_ws/src/locationCamera/savedimg1/85.jpg 2 479 291 77 71 239 303 88 70
+/home/josh/urobot_ws/src/locationCamera/savedimg1/86.jpg 3 324 285 73 76 565 260 66 74 23 353 80 75
+/home/josh/urobot_ws/src/locationCamera/savedimg1/87.jpg 2 413 230 80 71 115 317 70 73
+/home/josh/urobot_ws/src/locationCamera/savedimg1/88.jpg 2 459 187 85 74 172 328 73 65
+/home/josh/urobot_ws/src/locationCamera/savedimg1/89.jpg 2 425 71 86 84 187 295 74 76
+/home/josh/urobot_ws/src/locationCamera/savedimg1/9.jpg 3 545 109 58 63 356 144 64 66 103 237 59 63
+/home/josh/urobot_ws/src/locationCamera/savedimg1/90.jpg 2 391 172 83 85 571 2 67 77
+/home/josh/urobot_ws/src/locationCamera/savedimg1/91.jpg 2 508 111 78 82 367 310 76 77
+/home/josh/urobot_ws/src/locationCamera/savedimg1/92.jpg 2 458 161 73 77 338 374 81 74
+/home/josh/urobot_ws/src/locationCamera/savedimg1/93.jpg 1 460 263 82 71
+/home/josh/urobot_ws/src/locationCamera/savedimg1/94.jpg 1 456 308 70 72
+/home/josh/urobot_ws/src/locationCamera/savedimg1/95.jpg 1 497 341 73 66
+/home/josh/urobot_ws/src/locationCamera/savedimg1/96.jpg 1 521 363 65 63
+/home/josh/urobot_ws/src/locationCamera/savedimg1/97.jpg 1 520 389 68 67
