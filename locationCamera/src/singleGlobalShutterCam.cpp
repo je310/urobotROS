@@ -230,12 +230,12 @@ int main(int argc, char** argv) {
             }
             if(shouldRecordToFile == 1){
                 std::stringstream ss;
-                ss <<recPath<< "/savedimg1/" << count << ".jpg";
+                ss <<recPath<< "/savedimgBG/" << count << ".jpg";
                 //cv::cvtColor(frame0, frame0, cv::COLOR_GRAY2BGR);
                 cv::imwrite(ss.str(),frame0);
                 cv::imshow("liveView",frame0);
                 cv::waitKey(1);
-                ros::Duration sleep(0.2);
+                ros::Duration sleep(0.1);
                 sleep.sleep();
             }
 

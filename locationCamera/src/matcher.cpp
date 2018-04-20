@@ -39,17 +39,24 @@ struct robot{
     loc location;
     ros::Time timeSincePos;
     ros::Time timeSinceRot;
+    loc avLocaiton;
+    vector<ros::Time> listTimePos;
+    vector<ros::Time> listTimeRot;
+    float posConf = 0;
+    float rotConf = 0;
     int localID = -1;
     int globalID= -1;
 };
 
 int localIDcount = 0;
-
+ros::Time newestFrame;
 std::vector<robot> robots;
+std::vector<robot> globRobots;
 
 /** Function Headers */
 std::vector<loc> detectAndDisplay(Mat frame , std::vector<Mat> robotTemplate);
 void correspondRobots(std::vector<robot> &existingRobots,std::vector<loc> newRobots,int horizon);
+void correspondGlobalRobots(std::vector<robot> &globalRobots,std::vector<robot> localRobots);
 void clearRobots(vector<robot> &theseRobots, ros::Duration time);
 /** Global variables */
 String robotCascadeName = "/home/josh/urobot_ws/src/locationCamera/trained/cascade.xml";
@@ -59,7 +66,7 @@ String window_name = "Capture - robot detection";
 
 /** @function main */
 
-
+int expectedRobotNum = 3;
 
 int main( int argc, char** argv )
 {
@@ -88,6 +95,11 @@ int main( int argc, char** argv )
     ss.str("");
 
 
+    for(int i =0; i < expectedRobotNum; i++){
+        robot newRob;
+        newRob.globalID = i;
+        globRobots.push_back(newRob);
+    }
 
     //Mat robotTemplate = imread( "/home/josh/urobot_ws/src/locationCamera/images/temp.png", CV_LOAD_IMAGE_GRAYSCALE );
 
@@ -99,8 +111,10 @@ int main( int argc, char** argv )
     capture.open( -1 );
     if ( ! capture.isOpened() ) { printf("--(!)Error opening video capture\n"); return -1; }
     int count = 0;
+    bool debug = true;
     while (  capture.read(frame) )
     {
+        newestFrame = ros::Time::now();
         count ++;
         if(count %90 == 0) printf("100\n");
         if( frame.empty() )
@@ -112,25 +126,39 @@ int main( int argc, char** argv )
         //-- 3. Apply the classifier to the frame
 
         std::vector<loc> listOfRobots = detectAndDisplay( frame , templateList);
-        if(listOfRobots.size() > 0 ){
-            for(int i = 0; i < listOfRobots.size(); i++){
-                line( frame, listOfRobots[i].postion , listOfRobots[i].postion + listOfRobots[i].forwardVec , Scalar(0, 0, 255), 4 );
+
+
+        correspondRobots(robots,listOfRobots,4000);
+        clearRobots(robots,ros::Duration(0.5));
+        correspondGlobalRobots(globRobots,robots);
+        if(debug){
+            if(listOfRobots.size() > 0 ){
+                for(int i = 0; i < listOfRobots.size(); i++){
+                    line( frame, listOfRobots[i].postion , listOfRobots[i].postion + listOfRobots[i].forwardVec , Scalar(0, 0, 255), 4 );
+                }
             }
+            for(int i = 0; i < globRobots.size(); i++){
+
+                stringstream number;
+                number << "ID:"<<globRobots[i].globalID<<"Pos:"<<globRobots[i].listTimePos.size()<<"Rot:"<<globRobots[i].listTimeRot.size();
+
+                putText(frame, number.str(), globRobots[i].location.postion,
+                        FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(200,200,250), 1, CV_AA);
+                if(newestFrame - globRobots[i].timeSinceRot < ros::Duration(0.15)){
+                    Point2f ledLoc;
+                    float scale = 0.2;
+                    float ledSize = 35;
+                    ledLoc = globRobots[i].location.postion - scale* globRobots[i].location.forwardVec;
+                    circle(frame, ledLoc, scale*ledSize,cvScalar(200,0,250) );
+                }
+            }
+
+            imshow("robots",frame);
+
         }
-
-        correspondRobots(robots,listOfRobots,1000);
-        clearRobots(robots,ros::Duration(1));
-        for(int i = 0; i < robots.size(); i++){
-            stringstream number;
-            number << robots[i].localID;
-
-            putText(frame, number.str(), robots[i].location.postion,
-                FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(200,200,250), 1, CV_AA);
-        }
-        imshow("robots",frame);
-        cout << robots.size() << endl;
-
+        cout << globRobots[0].listTimePos.size() << endl;
         int c = waitKey(1);
+        if( (char)c == ' ' ) { debug= !debug; } // escape
         if( (char)c == 27 ) { break; } // escape
     }
     return 0;
@@ -195,24 +223,119 @@ std::pair<int,int> getNextBest(Mat &scoreMat){
 
 }
 
-void updateRobot(robot &toUpdate, loc value){
-    toUpdate.timeSincePos = ros::Time::now();
-    toUpdate.location.postion = value.postion;
-    if(value.validDir == true) {
-        toUpdate.timeSinceRot = ros::Time::now();
-        toUpdate.location.forwardVec = value.forwardVec;
+void tidyTimes(vector<ros::Time> &list){
+    for(int i = 0 ; i < list.size(); i++){
+        ros::Duration diff = ros::Time::now() - list[i];
+        if(diff > ros::Duration(3.0) ){
+            list.erase(list.begin() + i);
+            i = -1;
+        }
     }
 }
 
+void updateRobot(robot &toUpdate, loc value){
+    toUpdate.timeSincePos = newestFrame;
+    toUpdate.listTimePos.push_back(newestFrame);
+    tidyTimes(toUpdate.listTimePos);
+    toUpdate.location.postion = value.postion;
+    if(value.validDir == true) {
+        toUpdate.timeSinceRot = newestFrame;
+        toUpdate.listTimeRot.push_back(newestFrame);
+        tidyTimes(toUpdate.listTimeRot);
+        toUpdate.location.forwardVec = value.forwardVec;
+
+    }
+}
+
+void assignGlobal(robot &glob, robot local){
+    glob.localID = local.localID;
+    glob.location = local.location;
+    glob.timeSincePos = local.timeSincePos;
+    glob.timeSinceRot = local.timeSinceRot;
+    glob.listTimePos = local.listTimePos;
+    glob.listTimeRot = local.listTimeRot;
+    glob.posConf = local.posConf;
+    glob.rotConf = local.rotConf;
+    tidyTimes(glob.listTimePos);
+    tidyTimes(glob.listTimeRot);
+
+}
+
+bool allSatisfied(vector<bool> toCheck){
+    for(int i = 0; i < toCheck.size(); i ++){
+        if(toCheck[i]== false) return false;
+    }
+    return true;
+}
+
+float globGetDistance(robot glob, robot local){
+    Point2f distance = glob.location.postion - local.location.postion;
+    return pow(distance.x,2) + pow(distance.y,2);
+}
+
+void correspondGlobalRobots(std::vector<robot> &globalRobots,std::vector<robot> localRobots){
+    //stuff for the first time.
+    bool brandNew = true;
+    for(int i = 0; i < globalRobots.size();i++){
+        if(globalRobots[i].localID != -1){
+            brandNew = false;
+        }
+    }
+    if(brandNew && localRobots.size() == globalRobots.size()){
+        for(int i = 0; i < globalRobots.size();i++){
+            assignGlobal(globalRobots[i], localRobots[i]);
+        }
+        return;
+    }
+    // general case ;
+    vector<bool> globalSatisfied, localSatisfied;
+    for(int i = 0; i < globalRobots.size();i++){
+        globalSatisfied.push_back(false);
+    }
+    for(int i = 0; i < localRobots.size();i++){
+        localSatisfied.push_back(false);
+    }
+    for(int i = 0; i < globalRobots.size();i++){
+        for(int f = 0; f < localRobots.size();f++){
+            if (globalRobots[i].localID == localRobots[f].localID){
+                assignGlobal(globalRobots[i], localRobots[f]);
+                globalSatisfied[i] = true;
+                localSatisfied[f] = true;
+            }
+        }
+    }
+    if(allSatisfied(globalSatisfied) ||allSatisfied(localSatisfied) ) return ;
+
+    Mat scoreMat(globalRobots.size(),localRobots.size(),CV_32F,1e9);
+    for(int existing = 0 ; existing < globalRobots.size(); existing ++){
+        for(int incomming = 0; incomming < localRobots.size(); incomming ++){
+            if(!globalSatisfied[existing] && !localSatisfied[incomming]){
+                float score = globGetDistance(globalRobots[existing], localRobots[incomming]);
+
+                scoreMat.at<float>(existing,incomming) = globGetDistance(globalRobots[existing], localRobots[incomming]);
+            }
+        }
+    }
+
+    while(!allSatisfied(globalSatisfied) &&!allSatisfied(localSatisfied) && !complete(scoreMat,1e9)){
+        std::pair<int,int> lowestPair;
+        lowestPair = getNextBest(scoreMat);
+        assignGlobal(globalRobots[lowestPair.second], localRobots[lowestPair.first]);
+        globalSatisfied[lowestPair.second] = true;
+        localSatisfied[lowestPair.first] = true;
+    }
+
+}
 
 //this function will check the new potential robots and match them with existing robots
 void correspondRobots(std::vector<robot> &existingRobots,std::vector<loc> newRobots,int horizon){
     // do greedy asignment for all existing robots (as long as less than horizon.
     // any left over newRobots get new instances of robots made for them.
 
+
     //initially there is no robots at all
     if(existingRobots.size()==0 && newRobots.size() != 0){
-            for(int i = 0; i < newRobots.size(); i++){
+        for(int i = 0; i < newRobots.size(); i++){
             robot newRobot;
 
             newRobot.localID= localIDcount;
@@ -221,22 +344,28 @@ void correspondRobots(std::vector<robot> &existingRobots,std::vector<loc> newRob
             existingRobots.push_back(newRobot);
         }
     }
+    vector<bool> existingSatisfied, newSatisfied;
+    for(int i = 0; i < existingRobots.size();i++){
+        existingSatisfied.push_back(false);
+    }
+    for(int i = 0; i < newRobots.size();i++){
+        newSatisfied.push_back(false);
+    }
     Mat scoreMat(existingRobots.size(),newRobots.size(),CV_32F,1e9); // this will hold a complete score matrix
     for(int existing = 0 ; existing < existingRobots.size(); existing ++){
         for(int incomming = 0; incomming < newRobots.size(); incomming ++){
             float score = getDistance(existingRobots[existing], newRobots[incomming]);
-            if(score > 10000){
-                cout <<"hello"<<endl;
-            }
             scoreMat.at<float>(existing,incomming) = getDistance(existingRobots[existing], newRobots[incomming]);
         }
     }
-    if(scoreMat.cols > 0)cout << scoreMat<< endl<<endl;
+    //if(scoreMat.cols > 0)cout << scoreMat<< endl<<endl;
     while(!complete(scoreMat,horizon)){
         std::pair<int,int> lowestPair;
         lowestPair = getNextBest(scoreMat);
 
         updateRobot(existingRobots[lowestPair.second],newRobots[lowestPair.first]);
+        existingSatisfied[lowestPair.second] = true;
+        newSatisfied[lowestPair.first] = true;
     }
     while(!completeLoose(scoreMat,horizon)){
         std::pair<int,int> lowestPair;
@@ -245,8 +374,23 @@ void correspondRobots(std::vector<robot> &existingRobots,std::vector<loc> newRob
         newRobot.localID= localIDcount;
         localIDcount++;
         updateRobot(newRobot,newRobots[lowestPair.first]);
+        existingSatisfied[lowestPair.second] = true;
+        newSatisfied[lowestPair.first] = true;
         existingRobots.push_back(newRobot);
     }
+    while(!allSatisfied(newSatisfied)){
+        for(int i = 0; i < newRobots.size(); i++){
+            if(newSatisfied[i] == false){
+                robot newRobot;
+                newRobot.localID= localIDcount;
+                localIDcount++;
+                updateRobot(newRobot,newRobots[i]);
+                newSatisfied[i] = true;
+                existingRobots.push_back(newRobot);
+            }
+        }
+    }
+
 }
 
 /** @function detectAndDisplay */
@@ -262,24 +406,35 @@ std::vector<loc> detectAndDisplay( Mat frame , std::vector<Mat> robotTemplate)
     //-- Detect faces
     robot_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CASCADE_SCALE_IMAGE, Size(30, 30) );
     int robotCount = -1;
+    Ptr<SURF> detector = SURF::create();
+    int minHessian = 400;
+    detector->setHessianThreshold(minHessian);
+    FlannBasedMatcher matcher;
+    std::vector<Mat> descriptors_2(robotTemplate.size());
+    std::vector<std::vector<KeyPoint>> keypoints_2(robotTemplate.size());
+
+    for(int i = 0; i < robotTemplate.size(); i ++){
+        detector->detectAndCompute( robotTemplate[i], Mat(), keypoints_2[i], descriptors_2[i] );
+    }
+
     for( size_t i = 0; i < faces.size(); i++ )
     {
-        Point center( faces[i].x + faces[i].width/2, faces[i].y + faces[i].height/2 );
-        ellipse( frame, center, Size( faces[i].width/2, faces[i].height/2), 0, 0, 360, Scalar( 255, 0, 255 ), 4, 8, 0 );
+        robotCount++ ;
+        loc justPosRobot;
+        justPosRobot.postion = faces[i].tl() +0.5*(faces[i].br() -  faces[i].tl() );
+        listOfRobotPos.push_back(justPosRobot);
         Mat faceROI = frame_gray( faces[i] );
         std::vector<Rect> eyes;
         float prevBestMatches = 1e9;
-        for( int templateCounter = 0; templateCounter < robotTemplate.size(); templateCounter++){ // try a few different templates
 
-            int minHessian = 400;
-            Ptr<SURF> detector = SURF::create();
-            detector->setHessianThreshold(minHessian);
-            std::vector<KeyPoint> keypoints_1, keypoints_2;
-            Mat descriptors_1, descriptors_2;
-            detector->detectAndCompute( frame_gray(faces[i]), Mat(), keypoints_1, descriptors_1 );
-            detector->detectAndCompute( robotTemplate[templateCounter], Mat(), keypoints_2, descriptors_2 );
+
+
+        std::vector<KeyPoint> keypoints_1;
+        Mat descriptors_1;
+        detector->detectAndCompute( frame_gray(faces[i]), Mat(), keypoints_1, descriptors_1 );
+        for( int templateCounter = 0; templateCounter < robotTemplate.size(); templateCounter++){ // try a few different templates
             //-- Step 2: Matching descriptor vectors using FLANN matcher
-            FlannBasedMatcher matcher;
+
             std::vector< DMatch > matches;
             matcher.match( descriptors_1, descriptors_2, matches );
             double max_dist = 0; double min_dist = 100;
@@ -290,28 +445,19 @@ std::vector<loc> detectAndDisplay( Mat frame , std::vector<Mat> robotTemplate)
                 if( dist > max_dist ) max_dist = dist;
             }
 
-            //-- Draw only "good" matches (i.e. whose distance is less than 2*min_dist,
-            //-- or a small arbitary value ( 0.02 ) in the event that min_dist is very
-            //-- small)
-            //-- PS.- radiusMatch can also be used here.
             std::vector< DMatch > good_matches;
             for( int i = 0; i < descriptors_1.rows; i++ )
             { if( matches[i].distance <= max(2*min_dist, 0.02) )
                 { good_matches.push_back( matches[i]); }
             }
-            //-- Draw only "good" matches
-            Mat img_matches;
-            drawMatches( frame_gray(faces[i]), keypoints_1, robotTemplate[templateCounter], keypoints_2,
-                         good_matches, img_matches, Scalar::all(-1), Scalar::all(-1),
-                         vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
-            //-- Localize the object
+
             std::vector<Point2f> obj;
             std::vector<Point2f> scene;
             for( size_t i = 0; i < good_matches.size(); i++ )
             {
                 //-- Get the keypoints from the good matches
                 obj.push_back( keypoints_1[ good_matches[i].queryIdx ].pt );
-                scene.push_back( keypoints_2[ good_matches[i].trainIdx ].pt );
+                scene.push_back( keypoints_2[templateCounter][ good_matches[i].trainIdx ].pt );
             }
             if(good_matches.size() > 2 ){
 
@@ -335,15 +481,17 @@ std::vector<loc> detectAndDisplay( Mat frame , std::vector<Mat> robotTemplate)
                     loc thisLoc;
                     thisLoc.postion = offset + (scene_corners[0] + scene_corners[2])/2 ;
                     thisLoc.forwardVec = scene_corners[2] - scene_corners[1];
-                    if(prevBestMatches == 1e9 && totError < 200){
+                    if(prevBestMatches == 1e9 && totError < 100000){
                         prevBestMatches = totError;
-                        listOfRobotPos.push_back(thisLoc);
-                        robotCount++ ;
+                        thisLoc.validDir = true;
+                        listOfRobotPos[robotCount] = thisLoc;
+
                     }
                     else{
-                        if(totError < prevBestMatches && robotCount >= 0 && totError < 200){
-                        listOfRobotPos[robotCount] = thisLoc;
-                        prevBestMatches = totError;
+                        if(totError < prevBestMatches && robotCount >= 0 && totError < 100000){
+                            thisLoc.validDir = true;
+                            listOfRobotPos[robotCount] = thisLoc;
+                            prevBestMatches = totError;
                         }
                     }
                     //good_matches.size();
