@@ -142,7 +142,7 @@ int main(int argc, char** argv) {
         recPath = ros::package::getPath("locationCamera");
     }
 
-    cv::VideoCapture cap(0);
+    cv::VideoCapture cap(1);
 
     if(!cap.isOpened())  // check if we succeeded
         return -1;
@@ -205,7 +205,7 @@ int main(int argc, char** argv) {
     cap >> frame1;
     InitmyUndistort(frame0,cinfo_L,map1,map2);
     unDistIm = myUndistort(frame0,map1,map2);
-    ros::Rate rate(31);
+    ros::Rate rate(200);
     while(ros::ok()){
 
 
@@ -230,9 +230,9 @@ int main(int argc, char** argv) {
             }
             if(shouldRecordToFile == 1){
                 std::stringstream ss;
-                ss <<recPath<< "/savedimgBG/" << count << ".jpg";
+                ss <<recPath<< "/savedimgOther/" << count << ".jpg";
                 //cv::cvtColor(frame0, frame0, cv::COLOR_GRAY2BGR);
-                cv::imwrite(ss.str(),frame0);
+                //cv::imwrite(ss.str(),frame0);
                 cv::imshow("liveView",frame0);
                 cv::waitKey(1);
                 ros::Duration sleep(0.1);

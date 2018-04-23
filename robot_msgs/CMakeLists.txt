@@ -1,25 +1,19 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(locationCamera)
+project(robot_msgs)
+
+## Compile as C++11, supported in ROS Kinetic and newer
+# add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  cv_bridge
-  image_transport
+  geometry_msgs
   roscpp
   rospy
   std_msgs
-  geometry_msgs
-  tf
-  image_geometry
-  camera_info_manager
-  robot_msgs
+  message_generation
 )
-
-SET(CMAKE_MODULE_PATH /usr/local/lib/cmake/ )
-find_package(aruco REQUIRED )
-find_package(OpenCV)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -55,10 +49,10 @@ find_package(OpenCV)
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   rawRobot.msg
-# )
+ add_message_files(
+   FILES
+   rawRobot.msg
+ )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -75,11 +69,11 @@ find_package(OpenCV)
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-#   geometry_msgs
-# )
+ generate_messages(
+   DEPENDENCIES
+   geometry_msgs
+   std_msgs
+ )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -106,16 +100,15 @@ find_package(OpenCV)
 ###################################
 ## The catkin_package macro generates cmake config files for your package
 ## Declare things to be passed to dependent projects
-## INCLUDE_DIRS: uncomment this if you package contains header files
+## INCLUDE_DIRS: uncomment this if your package contains header files
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
- # INCLUDE_DIRS include
-#  LIBRARIES locationCamera
-#  CATKIN_DEPENDS cv_bridge image_transport roscpp rospy std_msgs
+#  INCLUDE_DIRS include
+#  LIBRARIES robot_msgs
+ CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs message_runtime
 #  DEPENDS system_lib
-#CATKIN_DEPENDS  roscpp rospy message_runtime geometry_msgs std_msgs
 )
 
 ###########
@@ -124,85 +117,40 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-# include_directories(include)
 include_directories(
+# include
   ${catkin_INCLUDE_DIRS}
-  src/LogPolarFFTTemplateMatcher/
 )
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lpthread")
-
 ## Declare a C++ library
-# add_library(locationCamera
-#   src/${PROJECT_NAME}/locationCamera.cpp
+# add_library(${PROJECT_NAME}
+#   src/${PROJECT_NAME}/robot_msgs.cpp
 # )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-#add_dependencies(locationCamera ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(locationCamera_node src/locationCamera.cpp)
-add_executable(cameraLimiter src/cameraLimiter.cpp)
-add_executable(globalShutterCam src/globalShutterCam.cpp)
-add_executable(singleGlobalShutterCam src/singleGlobalShutterCam.cpp)
-add_executable(calibrateMarkers src/calibrateMarkers.cpp)
-add_executable(aruco_node src/aruco_node.cpp)
-add_executable(markerPose src/markerPose.cpp)
-add_executable(markerAgr src/markerAgr.cpp)
-add_executable(matcher src/matcher.cpp)
-add_executable(commandMixer src/commandMixer.cpp)
-add_executable(cvTesting src/cvTesting.cpp src/LogPolarFFTTemplateMatcher/fftm.cpp src/LogPolarFFTTemplateMatcher/fftm.hpp)
+## With catkin_make all packages are built within a single CMake context
+## The recommended prefix ensures that target names across packages don't collide
+# add_executable(${PROJECT_NAME}_node src/robot_msgs_node.cpp)
+
+## Rename C++ executable without prefix
+## The above recommended prefix causes long target names, the following renames the
+## target back to the shorter version for ease of user use
+## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
+# set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
+
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-#add_dependencies(matcher locationCamera_generate_messages_cpp)
+# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(commandMixer
-  ${catkin_LIBRARIES}
-   ${OpenCV_LIBS}
-)
- target_link_libraries(locationCamera_node
-   ${catkin_LIBRARIES}
- )
-target_link_libraries(cvTesting
-  ${catkin_LIBRARIES}
-)
-target_link_libraries(matcher
-  ${catkin_LIBRARIES}
-)
-target_link_libraries(cameraLimiter
-  ${catkin_LIBRARIES}
-)
-target_link_libraries(globalShutterCam
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(calibrateMarkers
-  ${catkin_LIBRARIES}
-)
-target_link_libraries(singleGlobalShutterCam
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(aruco_node
-  ${catkin_LIBRARIES}
-  ${aruco_LIBS}
-   ${OpenCV_LIBS}
-)
-
-target_link_libraries(markerPose
-  ${catkin_LIBRARIES}
-  ${aruco_LIBS}
-   ${OpenCV_LIBS}
-)
-target_link_libraries(markerAgr
-  ${catkin_LIBRARIES}
-  ${aruco_LIBS}
-   ${OpenCV_LIBS}
-)
-
+# target_link_libraries(${PROJECT_NAME}_node
+#   ${catkin_LIBRARIES}
+# )
 
 #############
 ## Install ##
@@ -219,7 +167,7 @@ target_link_libraries(markerAgr
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS locationCamera locationCamera_node
+# install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -244,7 +192,7 @@ target_link_libraries(markerAgr
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_locationCamera.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_robot_msgs.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

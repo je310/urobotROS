@@ -43,7 +43,7 @@ def timeToWait(wantedFreq,robots,bandwidth):
     time = (byteTotal * 8.0) / bandwidth
     if (time > (1.0/wantedFreq)):
         print 'there will be a bottle neck on IR comms channel'
-    return time +0.05
+    return time# +0.05
 
 
 
@@ -55,14 +55,14 @@ rob3 = 7 + 16*7
 
 def rob0CB(data):
     global rob0
-    rot = int(15*(data.angular.z + 1)/2)
-    lin = int(15*(data.linear.x + 1)/2)
+    rot = int(15*(data.angular.z/(2*3.14) + 1)/2)
+    lin = int(15*(data.linear.x/(0.1) + 1)/2)
     rob0 = lin +16* rot
 
 def rob1CB(data):
     global rob1
-    rot = int(15*(data.angular.z + 1)/2)
-    lin = int(15*(data.linear.x + 1)/2)
+    rot = int(15*(data.angular.z/(2*3.14) + 1)/2)
+    lin = int(15*(data.linear.x/(0.1) + 1)/2)
     rob1 = lin +16* rot
 
 def rob2CB(data):
@@ -110,7 +110,7 @@ def talker():
     type = 6
     msgs = [rob0,rob1,rob2,rob3]
     checksum = 0
-    wantedFreq =5
+    wantedFreq =10
     bandwidth = 2200
     outward = 1
 

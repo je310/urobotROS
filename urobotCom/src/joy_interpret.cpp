@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 
   ros::NodeHandle n;
 
-  ros::Subscriber chatter_pub = n.subscribe("/joy", 1000, joyCB);
+  ros::Subscriber chatter_pub = n.subscribe("/joy", 1, joyCB);
   rob0pub = n.advertise<geometry_msgs::Twist>("rob0",1);
   rob1pub = n.advertise<geometry_msgs::Twist>("rob1",1);
   rob2pub = n.advertise<geometry_msgs::Twist>("rob2",1);
@@ -64,19 +64,19 @@ int main(int argc, char **argv)
   linePub = n.advertise<std_msgs::String>("follow",1);
   special1Pub = n.advertise<std_msgs::String>("special1",1);
 
-  ros::Rate loop_rate(20);
+  ros::Rate loop_rate(10);
 
   while (ros::ok())
   {
       ros::spinOnce();
       geometry_msgs::Twist twistOut;
-      twistOut.angular.z = rob0Ang;
-      twistOut.linear.x = rob0Lin;
+      twistOut.angular.z = rob0Ang * 2 * 3.14;
+      twistOut.linear.x = rob0Lin * 0.1;
       rob0pub.publish(twistOut);
 
       geometry_msgs::Twist twistOut1;
-      twistOut1.angular.z = rob1Ang;
-      twistOut1.linear.x  = rob1Lin;
+      twistOut1.angular.z = rob1Ang* 2 * 3.14;;
+      twistOut1.linear.x  = rob1Lin* 0.1;
       rob1pub.publish(twistOut1);
 
       geometry_msgs::Twist twistOut2;
