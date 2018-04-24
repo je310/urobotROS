@@ -127,7 +127,7 @@ cv::Point2f operator*(cv::Mat M, const cv::Point2f& p)
 }
 
 struct loc{
-    Point2f postion;
+    Point2f postion = Point2f(0,0);
     Point2f forwardVec;
     bool validDir = false;
 };
@@ -166,7 +166,7 @@ String window_name = "Capture - robot detection";
 
 /** @function main */
 
-int expectedRobotNum = 2;
+int expectedRobotNum = 1;
 bool orderRobots = 0;
 int robotOrderCounter  =0;
 bool isClicked = false;
@@ -210,12 +210,16 @@ int main( int argc, char** argv )
     ros::init(argc, argv, "matcher");
     ros::NodeHandle node;
     image_transport::ImageTransport it_(node);
-    image_transport::Subscriber imSub = it_.subscribe("/camera/image",1, imageCB);
+    image_transport::Subscriber imSub = it_.subscribe("/camera_image",1, imageCB);
     char* window_name = "TrexhodControl";
     namedWindow( window_name, CV_WINDOW_AUTOSIZE );
     createTrackbar( window_name,
                     window_name, &threshold_value,
                     255,barCB);
+    if(argc>1){
+        cout << atoi(argv[1])<< "robots" << endl;
+        expectedRobotNum = atoi(argv[1]);
+    }
     barCB(0,0);
 
     VideoCapture capture;
@@ -231,22 +235,22 @@ int main( int argc, char** argv )
 //        templateList.push_back(robotTemplate);
 //        ss.str("");
 //    }
-    ss << path << "/images/temp.png";
+    ss << path << "/images/tempHomeHighExp.png";
     Mat robotTemplate = imread( ss.str(), IMREAD_GRAYSCALE );
     templateList.push_back(robotTemplate);
     ss.str("");
-    ss << path << "/images/temp1.png";
-    robotTemplate = imread( ss.str(), IMREAD_GRAYSCALE );
-    templateList.push_back(robotTemplate);
-    ss.str("");
-    ss << path << "/images/temp2.png";
-    robotTemplate = imread( ss.str(), IMREAD_GRAYSCALE );
-    templateList.push_back(robotTemplate);
-    ss.str("");
-    ss << path << "/images/temp3.png";
-    robotTemplate = imread( ss.str(), IMREAD_GRAYSCALE );
-    templateList.push_back(robotTemplate);
-    ss.str("");
+//    ss << path << "/images/tempHomeHighExpRight.png";
+//    robotTemplate = imread( ss.str(), IMREAD_GRAYSCALE );
+//    templateList.push_back(robotTemplate);
+//    ss.str("");
+//    ss << path << "/images/tempHomeHighExpRightLeft.png";
+//    robotTemplate = imread( ss.str(), IMREAD_GRAYSCALE );
+//    templateList.push_back(robotTemplate);
+//    ss.str("");
+//    ss << path << "/images/temp3.png";
+//    robotTemplate = imread( ss.str(), IMREAD_GRAYSCALE );
+//    templateList.push_back(robotTemplate);
+//    ss.str("");
 
     vector<ros::Publisher> publishers(expectedRobotNum);
     for(int i =0; i < expectedRobotNum; i++){
@@ -277,7 +281,7 @@ int main( int argc, char** argv )
     while(frame.rows ==0){
         ros::spinOnce();
     }
-    while (1)
+    while (ros::ok())
     {
         ros::spinOnce();
         if(!newFrame)continue;
@@ -323,7 +327,9 @@ int main( int argc, char** argv )
                 }
             }
 
+            if(count %90 == 0){
             imshow("robots",frame);
+            }
 
         }
         //cout << globRobots[0].listTimePos.size() << endl;
@@ -428,6 +434,9 @@ std::pair<int,int> getNextBest(Mat &scoreMat){
     cv::minMaxLoc(scoreMat, &min, &max, &min_loc, &max_loc);
     match.first = min_loc.x;
     match.second = min_loc.y;
+    if(match.first == -1){
+        cout <<"waht"<< endl;
+    }
     for(int i = 0; i < scoreMat.cols; i ++ ){
         scoreMat.at<float>(min_loc.y,i) = 1e10;
     }
@@ -707,7 +716,7 @@ std::vector<loc> detectAndDisplay( Mat frame , std::vector<Mat> robotTemplate)
                 Mat r,t;
                 float error = getTransform(scene,obj,r,t);
                 //Mat H = estimateRigidTransform( scene, obj, false );
-                if(r.dims != 0){
+                if(r.dims != 0 && error <100){
                     std::vector<Point2f> scene_reproject;
                     transformRT(scene,scene_reproject,r,t);
                     //cv::transform(scene,scene_reproject,H);
@@ -727,6 +736,9 @@ std::vector<loc> detectAndDisplay( Mat frame , std::vector<Mat> robotTemplate)
                     Point2f offset = faces[i].tl();
                     loc thisLoc;
                     thisLoc.postion = offset + (scene_corners[0] + scene_corners[2])/2 ;
+                    if(thisLoc.postion.x <1 ){
+                        cout <<"offset"<<offset<< "wat"<<endl;
+                    }
                     thisLoc.forwardVec = -scene_corners[2] + scene_corners[1];
 //                    if(prevBestMatches == 1e9 && totError < 100){
 //                        prevBestMatches = totError;

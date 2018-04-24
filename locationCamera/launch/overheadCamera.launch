@@ -1,0 +1,8 @@
+<launch>
+    <node name="irSender" pkg="urobotCom" type="ircom.py"/>
+    <node name="camera" pkg="camera_base" type="camera_base_node"/>
+    <node name="matcher" pkg="locationCamera" type="matcher" args="1" />
+    <node name="commandMixer" pkg="locationCamera" type="commandMixer" args="1" />
+
+
+</launch>

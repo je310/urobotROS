@@ -153,6 +153,7 @@ add_executable(markerPose src/markerPose.cpp)
 add_executable(markerAgr src/markerAgr.cpp)
 add_executable(matcher src/matcher.cpp)
 add_executable(commandMixer src/commandMixer.cpp)
+add_executable(userlandDemo src/userland.cpp)
 add_executable(cvTesting src/cvTesting.cpp src/LogPolarFFTTemplateMatcher/fftm.cpp src/LogPolarFFTTemplateMatcher/fftm.hpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -163,7 +164,10 @@ target_link_libraries(commandMixer
   ${catkin_LIBRARIES}
    ${OpenCV_LIBS}
 )
- target_link_libraries(locationCamera_node
+target_link_libraries(locationCamera_node
+  ${catkin_LIBRARIES}
+)
+ target_link_libraries(userlandDemo
    ${catkin_LIBRARIES}
  )
 target_link_libraries(cvTesting

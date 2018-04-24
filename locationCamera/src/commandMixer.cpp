@@ -14,6 +14,7 @@
 #include <geometry_msgs/Accel.h>
 #include <robot_msgs/rawRobot.h>
 #include <geometry_msgs/Twist.h>
+#include <geometry_msgs/Pose2D.h>
 
 #include <iostream>
 #include <stdio.h>
@@ -49,11 +50,12 @@ void updateRobots(vector<robot> &ourRobots, vector<geometry_msgs::Twist> cmds, f
 void estimateForwards(vector<robot> &ourRobots, float scale);
 void drawRobots(vector<robot> ourRobots, Mat &simulation, float scale);
 void cleanUpLists(vector<robot> &ourRobots, ros::Duration time);
-float posIIR = 0.1;
-float rotIIR = 0.02;
+void publishRobots(vector<robot> ourRobots, vector<ros::Publisher> &pubs);
+float posIIR = 0.4;
+float rotIIR = 0.1;
 float rotIIR2 = 0.1;
 
-int expectedRobots = 2;
+int expectedRobots = 1;
 vector<robot> robots(expectedRobots);
 vector<geometry_msgs::Twist> currentCommands(expectedRobots);
 
@@ -66,26 +68,35 @@ void imageCB(sensor_msgs::ImageConstPtr im){
     newFrame = 1;
 
 }
-float mainScale = 3200; // pix per m
+float mainScale = 4000; // pix per m
 int main( int argc, char** argv )
 {
     ros::init(argc, argv, "commandMixer");
     ros::NodeHandle node;
+
+    if(argc>1){
+        cout << atoi(argv[1])<< "robots" << endl;
+        expectedRobots = atoi(argv[1]);
+    }
     vector<ros::Subscriber> subscribers(expectedRobots);
     vector<ros::Subscriber> subscribersCmd(expectedRobots);
+    vector<ros::Publisher> publishers(expectedRobots);
     for(int i = 0; i < expectedRobots; i++){
-        stringstream ss,ssCmd;
+        stringstream ss,ssCmd,ssPub;
         ss << "/robot"<< i <<"/rawPositionData";
         ros::Subscriber thisSub = node.subscribe<robot_msgs::rawRobot>(ss.str(),1,boost::bind(dataCB,_1,i));
         ssCmd << "/rob"<< i <<"/";
         ros::Subscriber thisSubCmd = node.subscribe<geometry_msgs::Twist>(ssCmd.str(),1,boost::bind(cmdCB,_1,i));
         subscribers[i] = thisSub;
         subscribersCmd[i] = thisSubCmd;
+        ssPub << "/robot"<<i<<"/pose";
+        ros::Publisher thisPub = node.advertise<geometry_msgs::Pose2D>(ssPub.str(),1);
+        publishers[i]= thisPub;
     }
 
     image_transport::ImageTransport it_(node);
 
-    image_transport::Subscriber imSub = it_.subscribe("/camera/image",1, imageCB);
+    image_transport::Subscriber imSub = it_.subscribe("/camera_image",1, imageCB);
     Size imsize;
     imsize.width = 640;
     imsize.height = 480;
@@ -101,6 +112,7 @@ int main( int argc, char** argv )
         drawRobots(robots,frame, mainScale);
         line(frame,Point2i(20,440),Point2i(20+(mainScale/10),440),Scalar(0,40,55));
         imshow("simulation",frame);
+        publishRobots(robots,publishers);
     }
         waitKey(1);
         rate.sleep();
@@ -132,6 +144,17 @@ void cmdCB(const geometry_msgs::TwistConstPtr msg, int robotNum){
     currentCommands[robotNum] = thisMsg;
     robots[robotNum].cmdHistory.push_back(ourPair);
 }
+
+void publishRobots(vector<robot> ourRobots, vector<ros::Publisher> &pubs){
+    for(int i = 0 ; i < ourRobots.size(); i++){
+        geometry_msgs::Pose2D msg;
+        msg.x = ourRobots[i].location.postion.x/mainScale;
+        msg.y = (frame.rows-ourRobots[i].location.postion.y)/mainScale;
+        msg.theta = atan2(-ourRobots[i].estimatedForward.y,ourRobots[i].estimatedForward.x);
+        pubs[i].publish(msg);
+    }
+}
+
 Point2f rotateVec(Point2f in, float angle){
     Mat rotMat(2,2,CV_64F,Scalar(0.0));
     rotMat.at<double>(0,0) = cos(angle);
